@@ -1,0 +1,128 @@
+/*Colores*/
+:root {
+    --colorTextoBlanco: #ffffff;
+    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
+    --colorTextoNegro: #000000;
+    --colorInicial: rgba(65, 128, 175, 0.3);
+    --colorSecond: #86D597;
+    --colorInicialOpaco: #153658;
+}
+/*Seccion Principal de la seccion 2 que maneja 
+la disposición de los elementos*/
+.seccion2{
+position: relative;
+min-height: 100vh;
+display: flex;
+color: var(--colorTextoBlanco);
+background-color: var(--colorInicialOpaco);
+}
+/**Propiedades del vídeo de la sección2*/
+.video_seccion2{
+    position:relative;
+    width: 100vw;
+    height: 50vh;
+    object-fit: cover;
+    filter: brightness(70%);
+    box-shadow: 0 0 10px var(--colorTextoBlanco);
+}
+/**Propiedades del texto de la sección*/
+.texto{
+font-size:1.4em;
+margin:2em 0;
+}
+/**Propiedades de la imagen de la sección(cámara)*/
+.imagen{
+background-image: url("/Imagenes/Seccion_Inicio/Seccion2/camara-3d.png");
+background-repeat: no-repeat;
+background-size: contain;
+background-position: center;
+height: 300px;
+transition: transform 0.3s ease
+}
+/*Estilos al hacer hover a la imagen*/
+.imagen:hover{
+    transform:scale(1.1) rotateZ(1deg);
+}
+
+.video_seccion2{
+    position: relative;
+    width: 100vw;
+    height: 50vh;
+    object-fit: cover;
+    filter: brightness(70%);
+    box-shadow: 0 0 10px var(--colorTextoBlanco);
+    transition: transform 0.5s ease-out;
+}
+
+
+/*Media Query para Tablets*/
+@media (min-width:768px) and (max-width:1023px){
+    /*Tamaño de la fuente*/
+    .seccion2{
+        font-size:1.3em ;
+    }
+    /*Tamaño de la imagen y ubicación*/
+    .imagen{
+    width: 100%;
+    height: 200px;
+    background-position: center;
+}
+}
+
+/*Media Query para móviles*/
+@media (max-width:768px){
+/*Tamaño de la fuente*/
+.seccion2{
+font-size:1.1em ;
+}
+/*Tamaño de la imagen y ubicación*/
+.imagen{
+width: 100%;
+height: 120px;
+margin-bottom:3em;
+}
+/*Tamaño del texto*/
+.texto p{
+font-size:0.9em;
+line-height:1.6em;
+}
+}
+
+/*Media Query para pantallas más grandes*/
+@media (min-width:1366px){
+
+    /*Tamaño del texto*/
+    .texto{
+        font-size:1.7em;
+    }
+    /*Tamaño de la imagen y ubicación*/
+    .imagen{
+        height:200px;
+        max-height:30vh;
+        background-size:contain;
+        background-position:bottom;
+    }
+}
+
+/*Media Query para tablets*/
+@media (min-width:768px) and (max-width:1023px) {
+/*Margeb para la imagen*/
+.imagen{
+    margin-bottom:2em;
+}
+}
+
+/*Media Query para Pantallas más grandes*/
+@media (min-width:1024px) and (max-width:1365px){
+    /*Tamaño de la imagen y ubicación*/
+    .imagen{
+        height:200px;
+        max-height:30vh;
+        background-size:contain;
+        background-position:center;
+    }
+}
+
+
+
+

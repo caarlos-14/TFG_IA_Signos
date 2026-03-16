@@ -1,0 +1,201 @@
+/*Colores*/
+:root {
+    --colorTextoBlanco: #ffffff;
+    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
+    --colorTextoNegro: #000000;
+    --colorInicial: rgba(65, 128, 175, 0.3);
+    --colorSecond: #86D597;
+    --colorInicialOpaco: #153658;
+}
+/*Seccion principal 
+con posicionmamiento de los elementos que lo componen*/
+.seccion_inicio{
+height: 100%;
+min-height:100vh;
+position: relative;
+z-index: 1;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+/*Video Inicio*/
+.video_inicio{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+/*Contendedor de Navegación*/
+.navegacion{
+margin: 2em;
+background-color: var(--colorInicial);
+border-radius: 40px;
+
+}
+
+/*Enlaces de navegación*/
+.navegacion .nav-link{
+color: var(--colorTextoBlanco) !important;
+font-weight: bold;
+transition: transform 0.3s ease;
+position: relative;
+font-size: 0.9em;
+cursor:pointer;
+}
+
+/*Un Pseudoelemento para establece la interactividad*/
+.navegacion .nav-link:not(.log)::after{
+position: absolute;
+content: "";
+text-decoration: underline;
+background-color: var(--colorTextoBlanco);
+width: 0%;
+height: 3px;
+left: 0%;
+bottom: 6px;
+transition: width 0.5s ease;
+}
+/*Al activarse los enlaces*/
+.navegacion .nav-link.active::after,
+.nav-link:focus::after{
+width: 100%;
+}
+.navegacion .nav-link.active{
+color: var(--colorSecond) !important;
+}
+
+/*Un Pseudoelemento para establece la interactividad al hacer hover*/
+.navegacion .nav-link:hover::after{
+width: 100%;
+}
+/*Hover principal*/
+.nav-link:hover{
+transform: translateY(-2px);
+color: var(--colorSecond) !important;
+}
+/*Logo puesto como fondo*/
+.logo{
+background-image: url("/Imagenes/Seccion_Inicio/logo_blanco.png");
+background-size: contain;
+background-position: center;
+width: 120px;
+height: 50px;
+background-repeat: no-repeat;
+transition: transform 2s ease;
+}
+/*Estilos del icono de navbar para pantallas más pequeñas*/
+.navbar-toggler-icon{
+    width: 30px;
+    height: 30px;
+    padding: 1em;
+}
+
+.navbar-toggler{
+    width: 12%;
+    margin-right:0.5em;
+}
+/*Ligera Animación */
+.logo:hover{
+transform: scale(1.2);
+}
+
+/*Enlaces del login*/
+.login .nav-link{
+color: var(--colorTextoNegro) !important;
+background-color: var(--colorTextoBlanco);
+border-radius:20px;
+display:flex;
+}
+/*Ponemos position relative para que las opciones del desplegable se ubiquen justo debajo del boton login*/
+.login{
+position:relative;
+}
+
+
+
+/*Color del desplegable del navbar de fondo*/
+.offcanvas {
+background-color: var(--colorInicialOpaco);
+}
+
+/*Color al boton de close*/
+.offcanvas .btn-close,.offcanvas .offcanvas-title{
+filter: invert(1);
+}
+
+/*Estilos del nombre de usuario al iniciar sesión y manejamos la disposición por si el nombre es
+largo utilizando el text overflow ellipsis*/
+ #usuario{
+  user-select:none;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  max-width:100%;
+}
+
+/*SECCION LISTA DESPLEGABLE PARA CERRAR SESION DEL USUARIO ESTILOS
+
+Pendiente de acabar
+
+*/
+
+.lista-opciones-perfil{
+    position:absolute;
+    list-style-type:none;
+    width:100%;
+    right:1em;
+}
+
+.opcion-sesion{
+height:5vh;
+display:flex;
+justify-content:center;
+background-color:var(--colorInicial);
+border-bottom-left-radius: 20px;
+border-bottom-right-radius:20px;
+}
+
+.opcion-sesion a{
+    color:var(--colorTextoBlanco) !important;
+    cursor:pointer;
+}
+
+
+
+/*Media Query para Moviles*/
+@media (max-width:768px){
+
+    /*Estilos para el icono de navbar al colapsar*/
+    .navbar-toggler-icon{
+    width: 30px;
+    height: 30px;
+    padding: 0.2em;
+    }
+    /*Estilos para darle margen al navbar completo*/
+    .navegacion{
+    margin:0.8em 0.8em;
+    }
+}
+
+/*Media query para que la linea de subrayado de los enlaces ocupe solo el texto cuando el navbar colapsa*/
+@media (max-width:992px){
+    .navegacion .navbar-nav{
+    align-items:center;
+    }
+    .navbar-toggler{
+    width: 8%;
+    margin-right:0.5em;
+    }
+}
+
+
+@media (max-width:576px) {
+    .navbar-toggler{
+    width: 18%;
+    margin-right:0.5em;
+    }
+}
+

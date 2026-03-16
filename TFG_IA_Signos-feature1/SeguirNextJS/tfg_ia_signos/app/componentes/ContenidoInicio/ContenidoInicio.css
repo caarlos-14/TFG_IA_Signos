@@ -1,0 +1,163 @@
+/*Colores*/
+:root {
+    --colorTextoBlanco: #ffffff;
+    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
+    --colorTextoNegro: #000000;
+    --colorInicial: rgba(65, 128, 175, 0.3);
+    --colorSecond: #86D597;
+    --colorInicialOpaco: #153658;
+}
+/*ESTILOS GENERALES*/
+/*Propiedades del contenedor de la frase*/
+.frase{
+display: flex;
+justify-content: center;
+align-items: start;
+margin-left:3em;
+flex-direction: column;
+color: var(--colorTextoBlanco);
+text-shadow: 0 0 2px var(--colorTextoBlanco);
+animation-name: aparecer;
+animation-duration: 3s;
+animation-timing-function: ease;
+}
+
+/*Propiedades de la imagen de la mano */
+.image{
+width: 100%;
+object-fit:contain;
+mask-image: linear-gradient(black 80%, transparent);
+}
+
+/*Propiedades del h1*/
+.frase h1{
+font-size: 2em;
+text-align: left;
+}
+/*Propiedades de la p*/
+.frase p{
+font-size: 1em;
+}
+/*Propiedades del boton*/
+.btn_frase{
+position: relative;
+text-decoration: none;
+border-radius: 20px;
+padding: 0.8em 2em;
+background-color: rgba(65, 128, 175,0.7);
+border: 2px dashed #86D597;
+font-size: 1em;
+box-shadow: 0 6px 0 rgba(255, 255, 255, 0.2);
+cursor: pointer;
+transition: 0.2s ease;
+color: var(--colorTextoBlanco);
+animation-name: aparecer;
+animation-duration: 3s;
+animation-timing-function: ease;
+}
+/*Propiedades del boton al hacer hover*/
+.btn_frase:hover{
+transform: translateY(4px);
+box-shadow: 0 2px 0 rgba(255, 255, 255, 0.2) ;
+}
+/*Propiedades para manejar los elementos de la página*/
+.inicio_seccion{
+position:relative;
+bottom:50;
+display:flex;
+align-items:center;
+}
+
+/*ANIMACIONES
+Animacion para jugar con la disposición de los elementos
+Estado inicial->Oculto
+Estado final -> Mostrar*/
+@keyframes aparecer{
+    0%{opacity: 0;}
+    100%{opacity: 1;}
+}
+
+/*MEDIA QUERYS ADAPTACION A LAS PANTALLAS 
+Utilizamos media querys y boostrap para manejar responsividad*/
+/*Media Query para Tablets*/
+@media (min-width:768px) and (max-width:1023px){
+
+    /*Ubicar la imagen en dispositvos tablet*/
+    .image{
+        width:50vw;
+        height:300px;
+        object-fit:cover;
+    }
+    /*Tamaño del h1 en tablets*/
+    .frase h1{
+    font-size: 2.5em;
+    }
+    /*Tamaño del p en tablets*/
+    .frase p{
+    font-size: 1.5em;
+    }
+}
+
+/*Media Query para Móviles*/
+@media (max-width:769px){
+
+     /*Tamaño del botón en móviles*/
+    .btn_frase{
+    font-size: 0.9em;
+    padding: 0.7em;
+    }
+
+     /*Tamaño de la mano en móviles*/
+    .image{
+    position: absolute;
+    width:100vw;
+    height:30vh;
+    top: 20%;
+    left: 0%;
+    filter: brightness(1);
+    }
+
+     /*Posicionamiento de la frase en móviles*/
+    .frase{
+        margin-top:-180px;
+        width: 100%;
+    }
+}
+
+/*Pantallas más grandes*/
+@media (min-width:1366px){
+
+    .frase{
+    width: 50%;
+    height:50vh;
+    }
+    .frase h1{
+    font-size: 3em;
+    }
+    .frase p{
+    font-size: 1.5em;
+    }
+    .image{
+        height:50vh;
+        width:50vw;
+    }
+    .btn_frase{
+    margin-top: 2em;
+    }
+}
+
+/*Media Query para Pantallas parecida a los portatiles*/
+@media (min-width:1024px) and (max-width:1365px){
+.inicio_seccion{
+    margin-top:1.5em;
+}
+.frase h1{
+font-size: 2em;
+}
+.frase p{
+font-size: 1em;
+}
+.image{
+    height: 50vh;
+}
+}
