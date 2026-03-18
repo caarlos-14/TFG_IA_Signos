@@ -4,15 +4,20 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from passlib.context import CryptContext
 import re
+import os
+from dotenv import load_dotenv
 
 app = FastAPI() 
 
-pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
+pwd = CryptContext(schemes=["argon2"], deprecated="auto")
+
+
 #Modelo de datos para el usuario
 class Usuario_Registro(BaseModel):
     nombre:str
     email:str
     password:str
+
 
 def validar_password(password):
 
@@ -33,6 +38,8 @@ def validar_password(password):
     
     return False
 
+def hashPassword(password):
+    return pwd.hash(password)
 
 
 # Configuración de CORS para permitir solicitudes desde el frontend
@@ -49,9 +56,11 @@ app.add_middleware(
     allow_headers=["*"],
     allow_credentials=True
 )
+
+load_dotenv()
 # Configuración de Supabase
-url = ""
-key = ""
+url = os.getenv("NEXT_PUBLIC_SUPABASE_URL")
+key = os.getenv("NEXT_PUBLIC_SUPABASE_KEY")
 
 # Crear cliente de Supabase
 supabase: Client = create_client(url, key)
@@ -77,7 +86,7 @@ def insertar_datos(usuario:Usuario_Registro):
         data = {
         "nombre":usuario.nombre,
         "email":usuario.email,
-        "password": pwd_context.hash(usuario.password[:72])
+        "password": hashPassword(usuario.password)
         }   
             
         supabase.table("Usuario").insert(data).execute()
@@ -89,25 +98,29 @@ def insertar_datos(usuario:Usuario_Registro):
 
 
 
+
 class Usuario_Login(BaseModel):
     usuario: str
     password: str
 
-@app.post("/login")
-async def login(usuario: Usuario_Login):
-    try:
-        resultado = supabase.table("Usuario").select("*").eq("nombre", usuario.usuario).execute()
+def verificarPasswd(password,password_hash):
+    return pwd.verify(password,password_hash)
 
-        if not resultado.data:
+@app.post("/login")
+async def login(usuario_form: Usuario_Login):
+    try:
+        resul = supabase.table("Usuario").select("*").eq("nombre", usuario_form.usuario).execute()
+
+        if not resul.data:
             return {"success": False, "message": "Usuario no encontrado"}
 
-        user = resultado.data[0]
+        user = resul.data[0]
 
-        if user["password"] != usuario.password:
+        if not verificarPasswd(usuario_form.password,user["password"]):
             return {"success": False, "message": "Contraseña incorrecta"}
 
         return {
-            "message": "Inicio de sesión exitoso"
+            "success":"true",
         }
 
     except Exception as e:

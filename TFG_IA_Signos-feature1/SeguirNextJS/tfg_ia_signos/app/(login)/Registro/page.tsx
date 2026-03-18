@@ -11,4 +11,5 @@ return(
     
 )
 }
+//Exportamos el componente
 export default Registro;

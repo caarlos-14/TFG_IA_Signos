@@ -78,7 +78,7 @@ const LSE = () =>{
                 </div>
                 <div className="LSE_body">
                     {enlaces[pagina] &&(
-                        <iframe key={pagina} src={enlaces[pagina].enlace}  title="Paginas de aprendizaje"></iframe>
+                        <iframe key={pagina} src={enlaces[pagina].enlace}  title="Paginas de aprendizaje" ></iframe>
                     )}
                     
                 </div>

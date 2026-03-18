@@ -2,7 +2,7 @@
 
 //Importamos componentes y hooks necesarios para poder implementar la sección de la cámara
 import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect,useCallback } from "react";
 import Webcam from "react-webcam";
 import "@/app/componentes/Transcripcion/estilostutocam.css";
 
@@ -38,13 +38,13 @@ export default function Camara_Seccion() {
 
   //Hook para poder hacer referencia a la cámara y poder manejarla en el código
   const webcamRef = useRef<Webcam>(null);
-  //Hook para manejar el modo de la cámara | comienza en cámara trasera
-  const [modoCamara, setModoCamara] = useState("environment");
   //Hook boolean para activar y desactivar la cámara
   const [camaraActiva, setCamaraActiva] = useState(false);
+  const [dispositivos,setDispositivos] = useState<MediaDeviceInfo[]>([])
   //Hooks para los puntos tipo Number
   const [actual, setActual] = useState(0);
   const [clave, setClave] = useState(0);
+  const [selectedDevice,setSelectedDevice] = useState("")
 
   //Hook para poder cambiar el paso cada 3 segundos y medio
   useEffect(() => {
@@ -56,12 +56,20 @@ export default function Camara_Seccion() {
     return () => clearInterval(intervalo);
   }, []);
 
+  useEffect(() =>{
+    navigator.mediaDevices.enumerateDevices().then(handleDevices)
+  },[])
+
+  const handleDevices = useCallback((mediaDevices:MediaDeviceInfo[]) =>{
+    setDispositivos(mediaDevices.filter(({kind}) => kind === "videoinput"))
+  },[])
+
   //Actualizamos
   const paso = pasos[actual];
 
   return (
     <div className="cam_Page">
-      <div className="container-xl py-3">
+      <div className="container-fluid py-3">
 
         {/* Tutorial carousel */}
         <div className="row mb-4">
@@ -99,7 +107,7 @@ export default function Camara_Seccion() {
                   mirrored={true}
                   screenshotFormat="image/jpeg"
                   videoConstraints={{
-                    facingMode: modoCamara,
+                    deviceId:selectedDevice
                   }}
                   className="webcam"
                 />
@@ -107,7 +115,7 @@ export default function Camara_Seccion() {
             </div>
 
             {/* Botones integrados debajo de la cámara */}
-            <div className="botones-cam d-flex flex-row gap-2 mt-3 justify-content-center justify-content-md-start w-70">
+            <div className="botones-cam d-flex flex-wrap flex-md-nowrap flex-row gap-2 mt-1 justify-content-center">
               {camaraActiva ? (
                 <button
                   className="btn-cam"
@@ -123,21 +131,17 @@ export default function Camara_Seccion() {
                   Desactivar cámara
                 </button>
               )}
-              <button
-                className="btn-cam"
-                onClick={() =>
-                  setModoCamara(
-                    modoCamara === "user" ? "environment" : "user"
-                  )
-                }
-              >
-                Girar cámara
-              </button>
-              <button
-                  className="btn-cam"
-                >
-                  Cambiar cámara
-                </button>
+              {dispositivos.length > 0 && (
+                <select className="btn-cam" value={selectedDevice}onChange={(e) => setSelectedDevice(e.target.value)}>
+                <option value="">Seleccionar Cámara</option>
+                {dispositivos.map((device,index) => (
+                  <option key={index} value={device.deviceId}>
+                    {device.label || `Cámara ${index+1}`}
+                  </option>
+                ))}
+                </select>
+              )
+              }
             </div>
           </div>
 

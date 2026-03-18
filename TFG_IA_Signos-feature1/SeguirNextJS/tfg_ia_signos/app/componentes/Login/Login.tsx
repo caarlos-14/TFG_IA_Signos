@@ -34,7 +34,11 @@ const Login = () => {
             if (data.success) {
                 setExito(true);
                 setMensaje("¡Inicio de sesión exitoso!");
+                
+                setTimeout(() =>{
+                    setCargando(true);
                 router.push("/");
+                },2000)
             } else {
                 setExito(false);
                 setMensaje(data.message || "Usuario o contraseña incorrectos");

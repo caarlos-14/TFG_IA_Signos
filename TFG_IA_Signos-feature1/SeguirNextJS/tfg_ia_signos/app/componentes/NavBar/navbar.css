@@ -185,6 +185,11 @@ border-bottom-right-radius:20px;
     .navegacion .navbar-nav{
     align-items:center;
     }
+    .navbar-toggler-icon{
+    width: 30px;
+    height: 30px;
+    padding: 0.2em;
+    }
     .navbar-toggler{
     width: 8%;
     margin-right:0.5em;
