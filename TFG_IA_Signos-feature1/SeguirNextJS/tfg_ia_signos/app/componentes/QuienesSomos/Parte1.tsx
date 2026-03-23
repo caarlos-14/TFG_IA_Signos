@@ -7,6 +7,11 @@ const Parte1 = () =>{
 
 const [indice,setIndice] = useState(0);
 
+const imagenes = [
+    {foto40:"1KsRwaDfmouKGtII-nZ3N9FhSaMsEFwv4"},
+
+]
+
 
 const slide = [
     {

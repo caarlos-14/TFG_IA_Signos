@@ -1,0 +1,1399 @@
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(home)\layout.tsx ==== 
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  return (
+    <>
+        {/*Video aplicado al fondo de la página FONDO INICIO*/}
+        <video className="video_inicio" autoPlay muted loop playsInline>
+                <source src="/Imagenes/Seccion_Inicio/video_fondo.mp4" type="video/mp4"/>
+        </video>
+      {/*Habilitamos children para poder integrar los elementos desde el page.tsx habilitando 
+      el video en la página principal
+      
+      La estructura html no la definimos ya que en el layout principal ya la definimos*/}
+          {children}
+    </>
+  );
+}
+
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(home)\page.tsx ==== 
+"use client"
+
+//Importamos todos los componentes que se van a utilizar para la página principal
+import ContenidoInicio from '@/app/componentes/ContenidoInicio/ContenidoInicio'
+import Gestos from '@/app/componentes/Gestos/Gestos'
+import Seccion2 from '@/app/componentes/segunda_seccion/Seccion2'
+import Navbar from '@/app/componentes/NavBar/Navbar'
+import LSE from "@/app/componentes/LSE/LSE"
+//Importamos los hooks y la conexión con supabase para verificar que existe sesión
+import { supabase } from '@/supabase'
+import { useEffect } from 'react'
+import {useRouter} from 'next/navigation'
+
+export default function Home() {
+//**Codigo sujeto a pruebas, es posible quedeba borrarse más adelante */
+const router = useRouter();
+useEffect(() => {
+const comprobarSesion = async () =>{
+  const {data: {session},error} = await supabase.auth.getSession();
+if (error){
+  console.error("Error al obtener la sesión:", error);
+  return;
+}
+if(session){
+  console.log("Usuario autenticado:", session.user);
+}else{
+  console.log("No hay usuario autenticado");
+  /** 
+  setTimeout(() =>{
+  alert("No hay usuario registrado, redirigiendo para crear la sesión")
+  },5000)
+
+
+  setTimeout(() =>{
+    router.push("/Registro")
+  },8000)
+  */
+}
+}
+
+comprobarSesion();
+},[]);
+
+
+
+
+
+  return (
+<>
+{/*Establecemos los section para inidcar cada seccion ya que cada clase tiene su estilo
+en el archivo css*/}
+  <section className="seccion_inicio">
+             <Navbar></Navbar>
+             <ContenidoInicio/>
+             <Gestos/>
+  </section>
+  <section id="seccion2">
+    <Seccion2/>
+  </section>
+  <LSE></LSE>
+  </>
+
+  );
+}
+
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(login)\layout.tsx ==== 
+export default function LoginLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+/*Definimos el mismo layout quitando el video ya que en el 
+  registro no nos interesa que aparezca el video
+  
+  Habilitamos children para poder añadir contenido*/
+  return (
+    <>
+        <>
+          {children}
+        </>
+      </>
+  );
+}
+
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(login)\Login\page.tsx ==== 
+'use client'
+//Importamos la pagina del login para utilizarla
+import LoginPage from "@/app/componentes/Login/Login"
+
+
+const Login = () =>{
+return(
+    <>
+     {/*Agregamos el componente Registro a la página*/}
+    <LoginPage></LoginPage>
+    </>
+    
+)
+}
+//Exportamos el componente
+export default Login;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(login)\Registro\page.tsx ==== 
+//Importamos el componente registro para utilizarlo
+import RegistroPage from "@/app/componentes/Registro/Registro"
+
+
+const Registro = () =>{
+return(
+    <>
+     {/*Agregamos el componente Registro a la página*/}
+    <RegistroPage></RegistroPage>
+    </>
+    
+)
+}
+//Exportamos el componente
+export default Registro;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(main)\layout.tsx ==== 
+import Navbar from '@/app/componentes/NavBar/Navbar'
+export default function PaginasLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  return (
+    <>
+        {/*Video aplicado al fondo de las páginas*/}
+        <video className="video_inicio" autoPlay muted loop playsInline>
+                <source src="/Imagenes/Seccion_Inicio/video_fondo.mp4" type="video/mp4"/>
+        </video>
+        {/*Agregamos el navbar a todas las página dentro de la carpeta main*/}
+        <Navbar></Navbar>
+        <>
+          {children}
+        </>
+      </>
+  );
+}
+
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(main)\Quienes-Somos\page.tsx ==== 
+import Parte from "@/app/componentes/QuienesSomos/Parte1"
+const QuienesSomos = () =>{
+return(
+    <>
+     {/*Agregamos para que la seccion aparezca en la página*/}
+    <Parte></Parte>
+    </>
+    
+)
+}
+export default QuienesSomos;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\(main)\Traduccion\page.tsx ==== 
+import Transcripcion from "@/app/componentes/Transcripcion/Camara_Seccion"
+const Traduccion = () =>{
+return(
+    <>
+    {/*Agregamos para que la seccion aparezca en la página*/}
+    <Transcripcion></Transcripcion>
+    </>
+    
+)
+}
+export default Traduccion;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\ContenidoInicio\ContenidoInicio.tsx ==== 
+/**Importamos tanto el next/image como el Link para poder utilizarlo en nuestra página
+ * y aprovecharnos de la navegación y lo que nos ofrece image aparte del css del componente
+ */
+import '@/app/componentes/ContenidoInicio/ContenidoInicio.css'
+import Image from 'next/image'
+const ContenidoInicio = () => {
+    return(
+        <div className="inicio_seccion">
+            {/*Seccion frase del contenido de inicio*/}
+            <div className="col-12 col-md-6 frase ">
+            <h1>De la mano a la palabra</h1>
+            <p>Lleva tu habla a otro nivel y comunícate con quién desees.</p>
+            <a className="w-10 btn_frase" href="#seccion2" >Ver más</a>
+        </div>
+            <div className="col-12 col-md-6">
+                {/*Seccion de la imagen dentro del contenido de inicio*/}
+                <div>
+                    <Image
+                    src="/Imagenes/Seccion_Inicio/mano_inicio.png"
+                    alt="mano de inicio"
+                    className="image"
+                    width={500}
+                    height={500}
+                    />
+                </div>
+            </div>
+        </div>
+    );
+}
+export default ContenidoInicio;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\Footer\Footer.tsx ==== 
+'use client'
+
+//Importamos los componentes para navegacion e imagenes
+import Link from 'next/link';
+import Image from 'next/image';
+
+const Footer = () =>{
+
+    return(
+        <footer className="bg-dark text-white py-5 px-4 mt-auto border-top border-3 border-light">
+            {/**Seccion footer que se agrega a todas las páginas*/}
+            <div className="container-fluid mt-5">
+                {/*Alineamos al centro*/}
+                <div className="row text-center">
+                
+                
+                {/**Información sobre el TFG */}
+                <div className="col-12 col-md-4 mb-5 mb-md-0">
+                    <Image
+                    src="/Imagenes/Seccion_Inicio/logo_blanco.png"
+                    alt="Logo Principal"
+                    width={200}
+                    height={200}
+                    className="img-fluid"
+                    
+                    />
+                    {/*Titulo del trabajo*/}
+                    <h4 className="mt-3">Título del trabajo:Amadeus Transcripción Lenguaje de Señas</h4>
+                    <p>Desarrollo de Aplicaciones Web | Davante Medac | 2026</p>
+
+                    {/*Indicamos la url del github donde estará alojado nuestro proyecto*/}
+                    <div className="d-flex flex-row justify-content-center gap-3">
+                    <Image
+                    src="/Imagenes/footer/Imagenes/github.png"
+                    alt="Logo Github"
+                    width={30}
+                    height={30}
+                    className="img-fluid"
+                    />
+                    <a href="https://github.com/caarlos-14/TFG_IA_Signos.git" target="_blank" className="text-white text-decoration-none">Proyecto en Github</a>
+                    </div>
+                </div>
+
+                {/**Información sobre los alumnos*/}
+                <div className="col-12 col-md-4 mt-5  mb-5 mb-md-0">
+                <div className="d-flex flex-column gap-4">
+
+
+                    {/*Información sobre los alumnos*/}
+                    <div className="d-flex flex-column">
+                        <h5>Carlos Sánchez</h5>
+                        <small>(Alumno y Creador de Amadeus)</small>
+                        <small><a href="mailto:csg0037@alu.medac.es">csg0037@alu.medac.es</a></small>
+                        <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
+                        <Image
+                        src="/Imagenes/footer/Imagenes/Linkedin.png"
+                        alt="Logo Linkedin"
+                        width={30}
+                        height={30}
+                        className="img-fluid"
+                        />
+                        {/*Indicamos el linkedin*/}
+                        <small><a href="https://www.linkedin.com/in/carlos-s%C3%A1nchez-garc%C3%ADa/" target="_blank" className="text-white text-decoration-none">Linkedln Carlos Sánchez</a></small>
+                        </div>
+                    </div>
+
+
+                    {/*Información sobre los alumnos*/}
+                    <div className="d-flex flex-column">
+                        <h5>Jorge Valverde</h5>
+                        <small>(Alumno y Creador de Amadeus)</small>
+                        <small><a href="mailto:csg0037@alu.medac.es">jvb0017@alu.medac.es</a></small>
+                        <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
+                        <Image
+                        src="/Imagenes/footer/Imagenes/Linkedin.png"
+                        alt="Logo Linkedin"
+                        width={30}
+                        height={30}
+                        className="img-fluid"
+                        />
+                        <small><a href="https://www.linkedin.com/in/carlos-s%C3%A1nchez-garc%C3%ADa/" target="_blank" className="text-white text-decoration-none">Linkedln Jorge Valverde</a></small>
+                        </div>
+                    </div>
+
+
+
+                    {/*Información sobre los alumnos*/}
+                    <div className="d-flex flex-column">
+                        <h5>Ángel Sebastián</h5>
+                        <small>(Alumno y Creador de Amadeus)</small>
+                        <small><a href="mailto:csg0037@alu.medac.es">avc003@alu.medac.es</a></small>
+                        <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
+                        <Image
+                        src="/Imagenes/footer/Imagenes/Linkedin.png"
+                        alt="Logo Linkedin"
+                        width={30}
+                        height={30}
+                        className="img-fluid"
+                        />
+                        <small><a href="https://www.linkedin.com/in/carlos-s%C3%A1nchez-garc%C3%ADa/" target="_blank" className="text-white text-decoration-none">Linkedln Ángel Sebastián</a></small>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                {/*Navegación mini*/}
+                <div className="col-12 col-md-4 mt-5  mb-5 mb-md-0">
+                    <h6>Navegación</h6>
+                     <div className="d-flex flex-column justify-content-between gap-4 mt-5">
+                        <Link href="/" className="nav-link">Inicio</Link>
+                        <Link href="/Traduccion"  className="nav-link">Traducción</Link>
+                        <Link href="/Quienes-Somos" className="nav-link">Quiénes Somos</Link>
+                        <Link href="/Login" className="nav-link log">Iniciar Sesión</Link>     
+                     </div>
+                </div>
+            </div>
+                <div className="text-center mt-5">
+                <br/>
+                <small>2026 | Todos los derechos reservados</small>
+                </div>
+            </div>
+    </footer>
+    )
+}
+export default Footer
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\Gestos\Gestos.tsx ==== 
+//Importamos el css del componente 
+import '@/app/componentes/Gestos/gestos.css'
+//Importamos el componente image
+import Image from 'next/image'
+const Gestos = () => {
+
+    
+//Agregamos array de imágenes de la a-z
+        let imagenes = [
+            {letra: 'A', url: '/Imagenes/Seccion_Inicio/Signos/A.png'},
+            {letra: 'B', url: '/Imagenes/Seccion_Inicio/Signos/B.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'D', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'E', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+            {letra: 'C', url: '/Imagenes/Seccion_Inicio/Signos/C.png'},
+        ]
+
+        imagenes = [...imagenes,...imagenes]
+    
+    return (
+        <>
+        {/*Sección con la información de los tipos de manos que hay disponibles*/}
+        <div className="carusel">
+            <div className="grupo">
+                {/*Hacemos un map para agregar todas las imágenes y mejorar la escalabilidad */}
+                    {imagenes.map((imagen,index) => (
+                        <Image
+                            key={index}
+                            className="carta"
+                            src={imagen.url}
+                            alt="Imagen Gesto"
+                            width={100}
+                            height={100}
+                            title={imagen.letra}
+                        />
+                    ))}
+             </div>
+         </div>
+        </>
+    )
+}
+export default Gestos;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\Login\Login.tsx ==== 
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import '@/app/componentes/Login/estiloslogin.css'
+import { useRouter } from "next/navigation";
+
+const Login = () => {
+    const [usuario, setUsuario] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [mensaje, setMensaje] = useState<string>("");
+    const [exito, setExito] = useState<boolean>(false);
+    const [cargando, setCargando] = useState<boolean>(false);
+    const router = useRouter();
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const datos = {
+            usuario: usuario,
+            password: password
+        }
+        setCargando(true);
+        setMensaje("");
+        try {
+            const res = await fetch(`http://localhost:8000/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datos)
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                setExito(true);
+                setMensaje("¡Inicio de sesión exitoso!");
+                
+                setTimeout(() =>{
+                    setCargando(true);
+                router.push("/");
+                },2000)
+            } else {
+                setExito(false);
+                setMensaje(data.message || "Usuario o contraseña incorrectos");
+            }
+        } catch (error) {
+            setExito(false);
+            setMensaje("Error al conectar con el servidor");
+        } finally {
+            setCargando(false);
+        }
+    };
+
+    return (
+        <div className="login-page">
+
+            {/* BARRA SUPERIOR */}
+            <div className=" volver-inicio d-flex flex-column flex-md-row align-items-center ">
+
+                {/* VOLVER — izquierda */}
+                <Link href="/">
+                    <i className="bi bi-chevron-left "></i>
+                    <span>Volver al inicio</span>
+                </Link>
+
+                {/* LOGO — derecha */}
+                <div className="ms-md-auto logo-header">
+                    <Image
+                        src="/Imagenes/Seccion_Inicio/logo_blanco.png"
+                        alt="Logo"
+                        width={200}
+                        height={100}
+                    />
+                </div>
+
+            </div>
+
+            {/* CONTENEDOR PRINCIPAL */}
+            <div className="container-fluid p-0">
+                <div className="row g-0 h-100">
+
+                    {/* PANEL IMAGEN */}
+                    <div className="col-12 col-md-5 d-none d-md-flex imagen-login">
+                        <Image
+                            src="/Imagenes/Login/mano.jpeg"
+                            alt="Imagen Login"
+                            width={900}
+                            height={900}
+                        />
+                    </div>
+
+                    {/* PANEL FORMULARIO */}
+                    <div className="col-12 col-md-7 d-flex justify-content-center align-items-end align-items-md-center" id="sesion">
+                        <div id="sombreado" className="w-100">
+                            <h1>Inicia Sesión</h1>
+                            <br />
+                            <form onSubmit={handleSubmit}>
+                                <div className="input-group mb-3">
+                                    <input
+                                        id="username"
+                                        type="text"
+                                        name="username"
+                                        className="input-box"
+                                        placeholder="Nombre de usuario"
+                                        required
+                                        onChange={(e) => setUsuario(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="input-group mb-3">
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        className="input-box"
+                                        placeholder="Contraseña"
+                                        required
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+
+                                <button type="submit" id="ingreso" className="w-100" disabled={cargando}>
+                                    {cargando ? "Verificando..." : "Ingresar"}
+                                </button>
+
+                                <p className="mt-3">
+                                    ¿No tienes cuenta?{" "}
+                                    <Link id="link" href="/Registro">Regístrate</Link>
+                                </p>
+
+                                {mensaje && (
+                                    <p style={{
+                                        color: exito ? "green" : "red",
+                                        marginTop: "8px",
+                                        fontWeight: "500"
+                                    }}>
+                                        {mensaje}
+                                    </p>
+                                )}
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Login;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\LSE\LSE.tsx ==== 
+"use client"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import "@/app/componentes/LSE/LSE.css"
+
+
+const LSE = () =>{
+    const [pagina,setPagina] = useState(0);
+    const [valor,setValor] = useState(0);
+    const [utilizado,setUtilizado] = useState(false);
+
+    const enlaces =[
+        {enlace:"https://ielse.es/"},
+        {enlace:"https://www.emagister.com/"},
+        {enlace:"https://www.canalcursos.com/masformacion/cursos_y_cursos_fp_educacion_lenguaje_de_signos_espanola_online_online-opc22pc720p101t2/?campaignid=18800930355&adgroupid=144014671398&matchtype=&network=g&device=c&devicemodel=&keyword=&creative=684588770564&adposition=&placement=&clase2=sinfiltroprecio&gad_source=1&gad_campaignid=18800930355&gbraid=0AAAAADe2SwA_V4jffRrL4yvjWFF97uT3e&gclid=Cj0KCQiA49XMBhDRARIsAOOKJHaRL-x3B6NnToezzs-7Ob6ByqoFlbp3NSBeu8PXHxSf6scMJs4EtV0aAow6EALw_wcB#/subcategorias"}
+    ]
+
+        const items = [
+        {
+            titulo:"¿Que es el LSE?",
+            texto:`Es la lengua natural de las personas con discapacidad auditiva en España. 
+                        Es un idioma completo ,con grámatica y estructura propias, que se comunican
+                        a tráves del canal visual y gestual.`
+        },
+        {
+            titulo:"LSE VS Lengua Natural",
+            texto:`Ambos son idiomas completos, pero utilizan medios diferentes para la comunicación
+                        Español - Auditivo - Hablado y oído.
+                        LSE - Visual - Gestos/Expresiones`
+        },
+        {
+            titulo:"Sabias que...",
+            texto:"El LSE no sigue el mismo orden gramatical que el español normal"
+        },
+
+    ]
+
+    useEffect(() =>{
+    setUtilizado(true)
+      const interval = setInterval(() =>{
+        setValor((prev) => (prev+1) % items.length)
+      },5000)
+
+      return () => clearInterval(interval)
+    },[])
+
+    const handleAfter = () =>{
+        setPagina((prev) => (prev + 1) % enlaces.length)
+    }
+
+    const handleBefore = () =>{
+        setPagina((prev) => (prev - 1 + enlaces.length) % enlaces.length)
+    }
+
+    if(!utilizado) return null;
+    return(
+        <div className="container-fluid g-0">
+            <div className="row g-0">
+            <div className=" d-lg-none position-relative">
+                    <img className="position-absolute banner-img" width="100%" alt="banner de separación de sección" src="https://capsule-render.vercel.app/api?type=waving&height=100&color=86D597&reversal=true"/>
+            </div>
+
+            <div className="texto_LSE col-12 col-md-12 col-lg-5">
+            <div className="mb-5">
+            <h3>¿Quieres Aprender LSE?</h3>
+            </div>
+            <div>
+                <p>Por nuestra parte queremos facilitar <span className="destacado">sitios externos y recursos que os pueden facilitar el aprendizaje de
+                    del LSE(Lenguaje de señas española)</span>.<strong> A tráves del recuadro se tendrá accesos a varios recursos</strong>
+                </p>
+            </div>
+            </div>
+
+                
+            <div className="LSE_card col-12 col-md-12 col-lg-5">
+                <div className="LSE_header">
+                    <h4>Recursos Recomendados</h4>
+                </div>
+                <div className="LSE_body">
+                    {enlaces[pagina] &&(
+                        <iframe key={pagina} src={enlaces[pagina].enlace}  title="Paginas de aprendizaje" ></iframe>
+                    )}
+                    
+                </div>
+                 <div className="LSE_controles">
+                    <button onClick={handleBefore} className="btn">Anterior</button>
+                    {enlaces[pagina] &&(
+                        <a href={enlaces[pagina].enlace} target="_blank" className="btn">Acceder</a>
+                    )}
+                    <button onClick={handleAfter} className="btn">Siguiente</button>
+                </div>
+            </div>
+
+
+            <div className="LSE_window col-12">
+                <Image
+                src={"/Imagenes/LSE/Imagenes/LSE.png"}
+                alt="LSE Imagen"
+                width={50}
+                height={50}
+                className="img-fluid foto_LSE"
+                />
+            <div className="LSE_item">
+    
+            <h3>{items[valor].titulo}</h3>
+            <p>{items[valor].texto}</p>
+            </div>
+        </div>
+    </div>
+    </div>
+)
+}
+export default LSE
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\NavBar\Navbar.tsx ==== 
+"use client";
+
+//Importamos hooks para navegacion y saber la ruta en la que estamos
+import Link from 'next/link';
+import {usePathname} from 'next/navigation';
+//Importamos el archivo de supabase
+import { supabase } from '@/supabase';
+import { useEffect,useState } from 'react';
+import "@/app/componentes/NavBar/navbar.css"
+
+
+const Navbar = () => {
+//Hooks para usuario,verificar que exista sesion
+const [usuario,setUsuario] = useState<string | null>(null);
+const [activar,setActivar] = useState<boolean>(false);
+//Obtener la ruta actual
+const path = usePathname();
+
+useEffect(() =>{
+    const comprobarSesion = async () =>{
+        //Verificamos si existe sesion
+        const {data:{session}} = await supabase.auth.getSession();
+
+        //Si existe sesion actualizamos el usuario con el nombre de usuario
+        if (session){
+            var nombre = session.user.user_metadata.name;
+            setUsuario(nombre);
+        }
+    }
+    comprobarSesion();
+},[]);
+
+    //Funcion para ocultar y mostrar menu desplegable
+    const toggleMenu = () =>{
+        setActivar(!activar)
+    }
+
+    return (
+        <div className="col-12 p-0 contenedor-video"> 
+
+            {/*Ancho del navbar puesto para que ocupe todo el ancho de la página*/}
+                <nav className="navegacion navbar navbar-expand-lg py-2"> {/*La pagina colapsa en pantallas ≥992px*/}
+                    {/*Contenedor fluido ocupando todo el ancho*/}
+                    <div className="container-fluid d-flex flex-nowrap">
+
+                    {/*Del logo situado a la parte izquierda*/}
+                    <div className="navbar-left">
+                        <div className="btn navbar-brand logo"></div>
+                    </div>
+                    {/*Boton hambuerguesa*/}
+                    <button className="navbar-toggler navbar-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu">
+                            <span className="navbar-toggler-icon"></span>
+                    </button>
+
+                     <div className="offcanvas offcanvas-start" tabIndex={-1} id="offcanvasMenu">
+                        <div className="offcanvas-header">
+                            <h5 className="offcanvas-title text-center w-100">Menu</h5>
+                            <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+                        </div>
+
+                    {/*Menu de navegacion con ternario para añadir la clase active si es la ruta actual*/}
+                    <div className="enlaces offcanvas-body" id="menuNav">
+                        <div className="navbar-nav ms-auto gap-3 me-3">
+                            <Link href="/" className={`nav-link ${path == '/' ? 'active':''}`}>
+                            <i className="bi bi-house-door-fill me-2 fs-5"></i>Inicio
+                            </Link>
+                            <Link href="/Traduccion" className={`nav-link ${path == '/Traduccion' ? 'active':''}`}>
+                            <i className="bi bi-translate me-2 fs-5"></i>Traducción
+                            </Link>
+                            <Link href="/Quienes-Somos" className={`nav-link ${path == '/Quienes-Somos' ? 'active':''}`}>
+                            <i className="bi bi-people-fill me-2 fs-5"></i>Quiénes Somos
+                            </Link>
+                            {/*Si existe sesion mostramos nombre de usuario sino texto iniciar sesion*/}
+                            <div className="d-flex align-items-center">
+                            <div className="login">
+                            {usuario ? (
+                            <>
+                            <a onClick={toggleMenu} className="nav-link log px-4">
+                            <span id="usuario">{usuario}</span>
+                            <i className="bi bi-caret-down-fill ms-2"></i>
+                            </a>
+                            {/*Lista desplegable con opciones para gestionar perfil de usuario*/}
+                            {activar && 
+                            <ul className="lista-opciones-perfil">
+                            <li className="opcion-sesion">
+                            <a
+                            onClick={async () =>{
+                            await supabase.auth.signOut();
+                            setUsuario(null);
+                            }}
+                            >Cerrar Sesión
+                            </a>
+                            </li>       
+                            </ul>
+                            }
+                            </>
+                            ):(
+                            <>
+                            {/*En caso de no haber sesion se renderiza este link*/}
+                            <Link href="/Login" className="nav-link log px-4">
+                            <span className="me-1">Iniciar Sesión</span>
+                            <i className="bi bi-person-circle me-2"></i>
+                            </Link>
+                            </>
+                            )}
+                            
+                            </div></div>
+
+                            {/*Contenedor que aparece cuando el navbar colapsa*/}
+                            <div className="d-lg-none mt-4 text-center text-white ">
+                                <small>Proyecto Amadeus | Lenguaje de Señas en tiempo real 2026</small>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+  
+);
+};
+export default Navbar;
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\QuienesSomos\Parte1.tsx ==== 
+"use client"
+
+import {useState} from 'react'
+import "./Parte1.css"
+import Image from 'next/image';
+const Parte1 = () =>{ 
+
+const [indice,setIndice] = useState(0);
+
+
+const slide = [
+    {
+        titulo1: `¿Cuál es `,
+        titulo1_span:"nuestra visión ",
+        titulo1_parte2:"acerca de este proyecto?",
+        texto1:"Ser referencia líder en herramientas de transcripción y comunicación asistida eliminando barreras y conectando con los usuarios.",
+        imagen:`/Imagenes/Seccion_Inicio/logo_blanco.png`,
+        titulo2:"Nuestros principales",
+        titulo2_span:" valores",
+        valores:["Innovación","Inclusión","Precisión","Colaboración","Compromiso con la accesibilidad"]
+    },
+    {
+        titulo1:`¿Donde nace `,
+        titulo1_span:"Amadeus?",
+        texto1:`Somos una iniciativa dedicada a la creación de soluciones basadas en`,
+        texto1_parte2:"y enfocados a derribar la barrera de comunicación entre todas las personas",
+        texto1_strong:"inteligencia artificial(IA),",
+        imagen:`/Imagenes/Seccion_Inicio/logo_blanco.png`,
+        titulo2:`¿Cual es `,
+        titulo2_span:"nuestro Objetivo?",
+        texto2:`Nuestro objetivo es desarrollar herramientas de transcripción automatizada que permitan agilizar el trabajo de los usuarios y
+                    poder garantizar esa precisión a la hora de transcribir sus gestos.`
+    }
+]
+
+return(
+    <>
+    <div className="container-fluid d-flex justify-content-center p-0 min-vh-90 mb-4">
+        <div className="row seccion-quienes-somos">
+            
+            <a className="btn_flecha_izqda" onClick={() => setIndice((prev) => (prev + 1) % slide.length)}>
+                <i className="bi bi-caret-left fs-1"></i>
+            </a>
+            <a className="btn_flecha_dcha" onClick={() => setIndice((prev) => (prev - 1 + slide.length) % slide.length)}>
+                <i className="bi bi-caret-right fs-1"></i>
+            </a>
+        
+            <div className="col-10 col-md-6 parte1_texto ">
+                <h3>{slide[indice].titulo1}<span className="destacado">{slide[indice].titulo1_span}</span>{slide[indice].titulo1_parte2}</h3>
+                <p>{slide[indice].texto1}<strong> {slide[indice].texto1_strong}</strong>, 
+                {slide[indice].texto1_parte2}
+                </p>
+            </div>
+            <div className="col-10 col-md-5">
+                <Image 
+                alt="Logo Pagina"
+                width={300}
+                height={300}
+                className="img-fluid"
+                src={slide[indice].imagen}/>
+            </div>
+            <div className="col-12 objetivo">
+                <h3>{slide[indice].titulo2}<span className="destacado">{slide[indice].titulo2_span}</span></h3>
+                {slide[indice].texto2 && <p>{slide[indice].texto2}</p> }
+                    
+               {slide[indice].valores &&
+                <ul>
+                {slide[indice].valores.map((valor,i) =>(
+                    <li key={i}>{valor}</li>
+                ))}
+                </ul>
+               }
+            </div>
+    </div>
+    </div>
+<div className="container-fluid seccion_nosotros ">
+    <div className="row justify-content-around align-items-center min-vh-100">
+        <div className="titulo_seccion_nosotros text-center"><h2>Nuestro Equipo de Desarrollo</h2></div>
+        <div className="col-12 col-md-4 developer">
+            <h3 className="fw-bold fs-4">Desarrollador</h3>
+            <div className="foto_container">
+                <Image 
+                    src="/Imagenes/Quienes_Somos/Imagenes/Desarrolladores/Carlos_desarrollador.png"
+                    alt="Imagen Carlos"
+                    width={200}
+                    height={200}
+                    className="imagen_dev"
+                />
+            </div>
+            <h5 className="mt-1">Carlos Sánchez</h5>
+            <div className="descripcion">
+                <p><strong>Miembro de Amadeus</strong></p>
+            </div>
+        </div>
+        <div className="col-12 col-md-4 developer">
+            <h3 className="fw-bold fs-4">Desarrollador</h3>
+            <div className="foto_container">
+                <Image 
+                    src="/Imagenes/Quienes_Somos/Imagenes/Desarrolladores/Sebas_desarrollador.png"
+                    alt="Imagen Carlos"
+                    width={200}
+                    height={200}
+                    className="imagen_dev"
+                />
+            </div>
+          <h5 className="mt-1">Angel Sebastián</h5>
+            <div className="descripcion">
+                <p><strong>Miembro de Amadeus</strong></p>
+            </div>
+        </div>
+        <div className="col-12 col-md-4 developer">
+            <h3 className="fw-bold fs-4">Desarrollador</h3>
+            <div className="foto_container">
+                <Image 
+                    src="/Imagenes/Quienes_Somos/Imagenes/Desarrolladores/Jorge_desarrollador.png"
+                    alt="Imagen Jorge"
+                    width={180}
+                    height={180}
+                    className="imagen_dev"
+                />
+            </div>
+            <h5 className="mt-1">Jorge Valverde</h5>
+            <div className="descripcion">
+                <p><strong>Miembro de Amadeus</strong></p>
+            </div>
+        </div>
+        </div>
+    </div>   
+
+
+
+    <div className="Conatiner-fluid seccion-odiseIA min-vh-100">
+        <div className="row">
+            <div className="">
+                <h3>Ganadores del 3 Premio OdiseIA</h3>
+
+            </div>
+        </div>
+    </div> 
+    </>
+    
+)
+}
+export default Parte1;
+
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\Registro\Registro.tsx ==== 
+"use client"
+
+//Importamos el css del componente
+import "@/app/componentes/Registro/registro.css"
+import {useState,useEffect} from "react"
+import {useRouter} from "next/navigation"
+import Image from "next/image"
+import { supabase } from "@/supabase";
+
+//UseEffect para verificar en todo momento si hay una sesion activa
+const Registro = () =>{
+useEffect(() =>{
+    //Desestructuracion para extraer la informacion de sesion
+    const comprobarSesion = async () => {
+        const {data:{session}} = await supabase.auth.getSession();
+        //Si existe sesion, activa el estado
+        if(session){
+            setActivo(true);
+        }   
+    }
+    comprobarSesion();
+},[])
+
+/*Hooks para manejar los estados de cada campo del formulario de registro*/
+    const [email,setEmail] = useState<string>("");
+    const [password,setPasswd] = useState<string>("");
+    const [nombre,setNombre] = useState<string>("");
+//Hooks para manejar el mensaje que aparezca de aviso al usuario
+    const [mensaje,setMensaje] = useState<string>("");
+    const [mensajeTipo,setMensajeTipo] = useState<"success" | "danger" | "warning">("warning");
+//Hook para redirigir al usuario
+    const router = useRouter();
+//Hook para comprobar sesion
+    const [activo,setActivo] = useState(false);
+
+//Funcion para iniciar sesion con google
+async function sesionGoogle(){
+
+    //Iniciar sesion y redirigir a la raiz del proyecto
+    const {error} = await supabase.auth.signInWithOAuth({
+        provider:"google",
+        options:{
+            redirectTo:"http://localhost:3000/"
+        }
+    });
+    
+    //Manejando el error si no se pudo conectar
+    if(error){
+    setMensajeTipo("danger")
+    setMensaje("Error al iniciar sesión con Google");
+    }
+}
+
+//Funcion para validar los campos del registro antes de enviar al servidor
+const validarCampos = (password:string):boolean =>{
+
+    //Condicional para validar que el usuario rellena los campos
+    if(password.trim() === "" || nombre.trim() === ""){
+        setMensajeTipo("danger");
+        setMensaje("Los campos de nombre y contraseña son obligatorios");
+        return false;
+    }
+
+    //Condicional para validar el largo de la contraseña
+    if(password.length < 8 || password.length > 15){
+        setMensajeTipo("warning")
+        setMensaje("Numero de caracteres entre 8 y 15");
+        return false;
+    }
+    
+    //Condicional para validar la contraseña
+    if(!/[A-Z]/.test(password)){
+        setMensajeTipo("warning")
+        setMensaje("Falta mayúscula");
+        return false;
+    }
+    
+    //Condicional para validar la contraseña
+    if(!/[a-z]/.test(password)){
+        setMensajeTipo("warning")
+        setMensaje("Falta minúscula");
+        return false;
+    }
+    
+    //Condicional para validar la contraseña
+    if(!/[0-9]/.test(password)){
+        setMensajeTipo("warning")
+        setMensaje("Falta número");
+        return false;
+
+    //Condicional para validar la contraseña
+    }if(!/[^A-Za-z0-9]/.test(password)){
+        setMensajeTipo("warning")
+        setMensaje("Falta caracter especial ");
+        return false;
+    }
+        setMensaje("");
+        return true;
+}
+
+const registrarUsuario = async (e: any) =>{
+    //Evitamos la recarga del formulario
+    e.preventDefault();
+    
+    //Creamos un array con los datos a enviar
+    const datos = {nombre:nombre,email:email,password:password}
+
+    //Detenemos la funcion si uno de los condicionales no se cumple
+    if(!validarCampos(password)) return;
+        
+    {/*Enviamos los datos a la direccion indicada junto al fetch*/}
+        try{
+            const response = await fetch("http://localhost:8000/insertar",{
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(datos)
+            })
+
+            const {status,message} = await response.json();
+            /**Indicamos la acción que va a realizar si el estado de la conexión es exitoso */
+            if(status === "success"){
+                setTimeout(() =>{
+                router.push("/Login");
+                },2000);
+                setMensajeTipo("success")
+                setMensaje(message);
+            /**En caso contrario indicamos mensaje de error */
+            }else{
+                setMensajeTipo("warning")
+                setMensaje(message);
+            }
+            /**Manejamos el error e indicamos mensaje de error */
+            }catch(error){
+                setMensajeTipo("danger")
+                setMensaje("Error al registrar el usuario");
+            }
+        }
+
+
+
+    return(
+        <div className="container-fluid p-0">
+            {/*Contenedor de ancho completo con padding:0*/}
+            <div className="row g-0">
+                {/*Div de la imagen en la parte derecha cambiado de orden (order-2)
+                Con col-12 en movil y pantalla media >= 768px
+                Con col-lg-6 >=992px
+                */}
+               <div className="imagenes_registro col-12 col-md-12 col-lg-6 order-2 ">
+                    <Image src="/Imagenes/Seccion_Registro/inicio.jpg" alt="Imagen de registro" width={500} height={500} className="img-fluid imagen_registro "/>
+                    
+                    {/*Condicion para si no esta registrado no salga la opcion de volver inicio
+                    pero si salga el logo*/}
+                    <div className="parte_superior">
+                    {activo && 
+                    <a href="/" className="volver">Volver al inicio</a>
+                    }
+                    <Image src="/Imagenes/Seccion_Inicio/logo_blanco.png" alt="Logo Amadeus" width={200} height={220} className="img-fluid logo_registro"/>
+                    </div>
+                    
+                </div> 
+                {/*Div del contenedor de registro
+                Con col-12 en movil y pantalla media >= 768px
+                Con col-lg-6 >=992px
+                */}
+                <div className="registro_seccion col-12 col-md-12 col-lg-6">
+                {/*Asignamos al formulario la funcion de registrar usuario y ponemos order-1*/}
+                <form className="formulario col-12 col-md-8 order-1 " onSubmit={registrarUsuario}>
+                    <h1>Crea una cuenta</h1>
+
+                    <p>¿Ya tienes cuenta?&nbsp;<a className="text-decoration-none" href="/Login">Inicia sesión</a></p>
+                    {/*Campos del formulario para registrarse y cada campo se le asigna su valor actual
+                    a su hook correspondiente*/}
+                    <input type="text" className="col-10 col-md-10" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
+                    <input type="email" className="col-10 col-md-10" placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" className="col-10 col-md-10" placeholder="Contraseña" value={password} onChange={(e) => setPasswd(e.target.value)}/>
+
+                    <button type="submit" className="col-10 col-md-10">Registrarse</button>
+                    {mensaje && <p className={`mensaje alert alert-${mensajeTipo}`}>{mensaje}</p>}
+
+                    {/*Linea de separacion*/}
+                    <hr className="col-10 col-md-10 border-light"/>
+
+                    {/*Boton para iniciar sesion con google al cual le indicamos la funcion*/}
+                    <button type="button" onClick={sesionGoogle} className="col-10 col-md-10"><Image src="/Imagenes/Seccion_Registro/google.svg" className="me-2" alt="Google" width={20} height={20}/>Accede con google</button>
+                </form>
+                </div>
+            </div>
+        </div>
+   
+    )
+}
+export default Registro
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\segunda_seccion\Seccion2.tsx ==== 
+//Agregamos los estilos del componente
+import '@/app/componentes/segunda_seccion/seccion2.css'
+
+const seccion2 = () =>{
+    return(
+        <section className="seccion2" id="seccion2">
+            <div className="container-fluid p-0 m-0">
+        {/**Video de la camara sección 2 */}
+        <video className="video_seccion2 col-12" autoPlay muted loop playsInline>
+            <source src="/Imagenes/Seccion_Inicio/Seccion2/camara_video.mp4" type="video/mp4"/>
+        </video>
+        {/**Texto Informativo de la sección2*/}
+    <div className="row justify-content-center align-items-center mt-5">
+        <div className="texto col-12 col-md-6">
+        <p className="ms-3">Capturamos todos los <span className="destacado">movimientos de la mano</span> en tiempo real, 
+            Escribimos tus letras de forma dinámica y <span className="destacado">hacemos que tu comunicación sea mas fluida.</span></p>
+        </div>
+        {/**Imagen de la cámara de fotos*/}
+        <div className="imagen col-md-6"></div>
+    </div>
+</div>
+</section>
+    )
+}
+export default seccion2;
+
+
+
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\componentes\Transcripcion\Camara_Seccion.tsx ==== 
+"use client";
+
+//Importamos componentes y hooks necesarios para poder implementar la sección de la cámara
+import Image from "next/image";
+import { useRef, useState, useEffect,useCallback } from "react";
+import Webcam from "react-webcam";
+import "@/app/componentes/Transcripcion/estilostutocam.css";
+
+/*Array de objetos para iterar sobre ellos y mostrar los pasos por:
+-Titulo
+-descripción
+-imagen
+-texto alternativo
+*/
+const pasos = [
+  {
+    titulo: "Paso 1: ¡Activa la cámara!",
+    descripcion: "Acepta el uso de la cámara en tu navegador para comenzar.",
+    img: "/Imagenes/Transcripcion/activacam.png",
+    alt: "Cámara",
+  },
+  {
+    titulo: "Paso 2: ¡Ponte frente a la cámara!",
+    descripcion: "Colócate en una zona bien iluminada y centrada.",
+    img: "/Imagenes/Transcripcion/frentecamara.png",
+    alt: "Activar Cámara",
+  },
+  {
+    titulo: "Paso 3: ¡Transcribe!",
+    descripcion: "Gesticula con claridad y observa el resultado en tiempo real.",
+    img: "/Imagenes/Transcripcion/hombreok.png",
+    alt: "Gesticulación",
+  },
+];
+
+
+export default function Camara_Seccion() {
+
+  //Hook para poder hacer referencia a la cámara y poder manejarla en el código
+  const webcamRef = useRef<Webcam>(null);
+  //Hook boolean para activar y desactivar la cámara
+  const [camaraActiva, setCamaraActiva] = useState(false);
+  const [dispositivos,setDispositivos] = useState<MediaDeviceInfo[]>([])
+  //Hooks para los puntos tipo Number
+  const [actual, setActual] = useState(0);
+  const [clave, setClave] = useState(0);
+  const [selectedDevice,setSelectedDevice] = useState("")
+
+  //Hook para poder cambiar el paso cada 3 segundos y medio
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setActual((prev) => (prev + 1) % pasos.length);
+      setClave((k) => k + 1);
+    }, 3500);
+    //Limpiamos el intervalo para que se vaya ejecutando perfectamente
+    return () => clearInterval(intervalo);
+  }, []);
+
+  useEffect(() =>{
+    navigator.mediaDevices.enumerateDevices().then(handleDevices)
+  },[])
+
+  const handleDevices = useCallback((mediaDevices:MediaDeviceInfo[]) =>{
+    setDispositivos(mediaDevices.filter(({kind}) => kind === "videoinput"))
+  },[])
+
+  //Actualizamos
+  const paso = pasos[actual];
+
+  return (
+    <div className="cam_Page">
+      <div className="container-fluid py-3">
+
+        {/* Tutorial carousel */}
+        <div className="row mb-4">
+          <div className="col-12">
+            <div className="tutorial">
+              <div className="tutorial_card" key={clave}>
+                <div className="texto_tuto">
+                <h3>{paso.titulo}</h3>
+                <p>{paso.descripcion}</p>
+                </div>
+                <Image src={paso.img} alt={paso.alt} width={180} height={180} />
+              </div>
+              <div className="tutorial_dots mt-2">
+                {pasos.map((_, i) => (
+                  <span key={i} className={i === actual ? "active" : ""} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/*Cámara + Transcripción*/}
+        <div className="row align-items-start g-4 justify-content-center">
+          {/* Webcam */}
+          <div className="col-12 col-md-6 col-lg-6">
+            <div className="webcam-wrapper">
+              {camaraActiva ? (
+                <div className="cam-off">
+                  <p>Cámara desactivada</p>
+                </div>
+              ) : (
+                <Webcam
+                  ref={webcamRef}
+                  audio={false}
+                  mirrored={true}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={{
+                    deviceId:selectedDevice
+                  }}
+                  className="webcam"
+                />
+              )}
+            </div>
+
+            {/* Botones integrados debajo de la cámara */}
+            <div className="botones-cam d-flex flex-wrap flex-md-nowrap flex-row gap-2 mt-1 justify-content-center">
+              {camaraActiva ? (
+                <button
+                  className="btn-cam"
+                  onClick={() => setCamaraActiva(false)}
+                >
+                  Activar cámara
+                </button>
+              ) : (
+                <button
+                  className="btn-cam"
+                  onClick={() => setCamaraActiva(true)}
+                >
+                  Desactivar cámara
+                </button>
+              )}
+              {dispositivos.length > 0 && (
+                <select className="btn-cam" value={selectedDevice}onChange={(e) => setSelectedDevice(e.target.value)}>
+                <option value="">Seleccionar Cámara</option>
+                {dispositivos.map((device,index) => (
+                  <option key={index} value={device.deviceId}>
+                    {device.label || `Cámara ${index+1}`}
+                  </option>
+                ))}
+                </select>
+              )
+              }
+            </div>
+          </div>
+
+          {/* Panel de transcripción */}
+          <div className="col-12 col-md-6 col-lg-6">
+            <div className="contenedor-transcripcion">
+              <div className="transcripcion-header">
+                <span className="dot-live" />
+                <h4>Transcripción en vivo</h4>
+              </div>
+              <p className="texto-introduccion">¡Comienza a transcribir!</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+// ==== Archivo: c:\Users\Carlos\Downloads\TFG_IA_Signos-feature1 (2)\TFG_IA_Signos-feature1\TFG_IA_Signos-feature1\SeguirNextJS\tfg_ia_signos\app\layout.tsx ==== 
+
+//Importamos Estilos Globales de la página
+import "@/app/globals.css";
+//Importamos lo necesario para cargar los estilos de boostrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+//Importamos Fuente Principal de la página
+import {Science_Gothic} from 'next/font/google'
+//Importamos Footer para añadirlo al final de la página
+import Footer from '@/app/componentes/Footer/Footer'
+/*Creamos una variable para poder utilizarla en nuestro css para aplicar
+  el tipo de letra a nuestra página web
+  
+  Mediante el contenido del párametro ´variable´ podremos hacer referencia al tipo de letra */
+const scienceGothic = Science_Gothic({
+  subsets:['latin'],
+  variable:'--font-sciencegothic',
+  fallback:['sans-serif']
+})
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+
+  //Estructura de nuestro layout base para todas las páginas de la app
+  return (
+    <html lang="es">
+      <body className={`${scienceGothic.variable}`}>
+        <main>
+          {children}
+        </main>
+        <Footer/>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossOrigin="anonymous"></script>
+      </body>
+    </html>
+  );
+}
+

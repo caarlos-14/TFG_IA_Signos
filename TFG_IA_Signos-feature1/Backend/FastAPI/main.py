@@ -22,10 +22,10 @@ class Usuario_Registro(BaseModel):
 def validar_password(password):
 
     if len(password) < 8 or len(password) > 15:
-        return "Numero de caracteres entre 8 y 15"
+        return "Número de caracteres entre 8 y 15"
 
     if not re.search(r"[A-Z]",password):
-        return "Falta mayuscula"
+        return "Falta mayúscula"
     
     if not re.search(r"[a-z]",password):
         return "Falta minúscula"
@@ -33,8 +33,8 @@ def validar_password(password):
     if not re.search(r"[0-9]",password):
         return "Falta número"
     
-    if not re.search(r"[^A-Z-a-z-0-9]",password):
-        return "Falta mayuscula"
+    if not re.search(r"[^A-Za-z0-9]",password):
+        return "Falta carácter especial"
     
     return False
 
@@ -46,6 +46,8 @@ def hashPassword(password):
 origins = [
     "http://localhost:3000",
     "https://lpgdlmjx-3000.uks1.devtunnels.ms/"
+    "http://tfg-amadeus.carlos-sanchez.dev"
+    "http://api.tfg-amadeus.carlos-sanchez.dev"
 ]
 
 # Agregar middleware de CORS a la aplicación FastAPI
@@ -68,6 +70,9 @@ supabase: Client = create_client(url, key)
 # Endpoint para insertar datos en la tabla "Usuario"
 @app.post("/insertar")
 def insertar_datos(usuario:Usuario_Registro):
+
+    if not usuario.validar_email():
+        return {"status":"error","message":"Email inválido"}
 
     validacion = validar_password(usuario.password)
 
@@ -120,7 +125,9 @@ async def login(usuario_form: Usuario_Login):
             return {"success": False, "message": "Contraseña incorrecta"}
 
         return {
-            "success":"true",
+            "success": True,
+            "message": "Login exitoso",
+            "user": {"nombre": user["nombre"], "email": user["email"]}
         }
 
     except Exception as e:

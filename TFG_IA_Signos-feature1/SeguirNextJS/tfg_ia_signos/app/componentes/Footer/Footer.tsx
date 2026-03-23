@@ -1,4 +1,6 @@
 'use client'
+
+//Importamos los componentes para navegacion e imagenes
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -107,7 +109,7 @@ const Footer = () =>{
                         <Link href="/" className="nav-link">Inicio</Link>
                         <Link href="/Traduccion"  className="nav-link">Traducción</Link>
                         <Link href="/Quienes-Somos" className="nav-link">Quiénes Somos</Link>
-                        <Link href="/Registro" className="nav-link log">Iniciar Sesión</Link>     
+                        <Link href="/Login" className="nav-link log">Iniciar Sesión</Link>     
                      </div>
                 </div>
             </div>

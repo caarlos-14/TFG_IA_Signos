@@ -1,12 +1,3 @@
-/*Colores*/
-:root {
-    --colorTextoBlanco: #ffffff;
-    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
-    --colorTextoNegro: #000000;
-    --colorInicial: rgba(65, 128, 175, 0.3);
-    --colorSecond: #86D597;
-    --colorInicialOpaco: #153658;
-}
 /*ESTILOS GENERALES*/
 /*Propiedades del contenedor de la frase*/
 .frase{

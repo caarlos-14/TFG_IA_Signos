@@ -27,6 +27,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${scienceGothic.variable}`}>
         <main>
+          <div className="contenido"></div>
           {children}
         </main>
         <Footer/>

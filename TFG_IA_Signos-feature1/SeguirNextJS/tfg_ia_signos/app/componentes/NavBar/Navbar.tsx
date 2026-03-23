@@ -1,28 +1,36 @@
 "use client";
+
+//Importamos hooks para navegacion y saber la ruta en la que estamos
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
+//Importamos el archivo de supabase
 import { supabase } from '@/supabase';
 import { useEffect,useState } from 'react';
-import '@/app/componentes/NavBar/navbar.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
+import "@/app/componentes/NavBar/navbar.css"
+
 
 const Navbar = () => {
+//Hooks para usuario,verificar que exista sesion
 const [usuario,setUsuario] = useState<string | null>(null);
 const [activar,setActivar] = useState<boolean>(false);
+//Obtener la ruta actual
 const path = usePathname();
 
 useEffect(() =>{
     const comprobarSesion = async () =>{
+        //Verificamos si existe sesion
         const {data:{session}} = await supabase.auth.getSession();
 
+        //Si existe sesion actualizamos el usuario con el nombre de usuario
         if (session){
             var nombre = session.user.user_metadata.name;
-            setUsuario(nombre || "Invitado");
+            setUsuario(nombre);
         }
     }
     comprobarSesion();
 },[]);
 
+    //Funcion para ocultar y mostrar menu desplegable
     const toggleMenu = () =>{
         setActivar(!activar)
     }
@@ -49,6 +57,8 @@ useEffect(() =>{
                             <h5 className="offcanvas-title text-center w-100">Menu</h5>
                             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
                         </div>
+
+                    {/*Menu de navegacion con ternario para añadir la clase active si es la ruta actual*/}
                     <div className="enlaces offcanvas-body" id="menuNav">
                         <div className="navbar-nav ms-auto gap-3 me-3">
                             <Link href="/" className={`nav-link ${path == '/' ? 'active':''}`}>
@@ -60,6 +70,7 @@ useEffect(() =>{
                             <Link href="/Quienes-Somos" className={`nav-link ${path == '/Quienes-Somos' ? 'active':''}`}>
                             <i className="bi bi-people-fill me-2 fs-5"></i>Quiénes Somos
                             </Link>
+                            {/*Si existe sesion mostramos nombre de usuario sino texto iniciar sesion*/}
                             <div className="d-flex align-items-center">
                             <div className="login">
                             {usuario ? (
@@ -68,6 +79,7 @@ useEffect(() =>{
                             <span id="usuario">{usuario}</span>
                             <i className="bi bi-caret-down-fill ms-2"></i>
                             </a>
+                            {/*Lista desplegable con opciones para gestionar perfil de usuario*/}
                             {activar && 
                             <ul className="lista-opciones-perfil">
                             <li className="opcion-sesion">
@@ -84,6 +96,7 @@ useEffect(() =>{
                             </>
                             ):(
                             <>
+                            {/*En caso de no haber sesion se renderiza este link*/}
                             <Link href="/Login" className="nav-link log px-4">
                             <span className="me-1">Iniciar Sesión</span>
                             <i className="bi bi-person-circle me-2"></i>
@@ -92,9 +105,10 @@ useEffect(() =>{
                             )}
                             
                             </div></div>
+
+                            {/*Contenedor que aparece cuando el navbar colapsa*/}
                             <div className="d-lg-none mt-4 text-center text-white ">
                                 <small>Proyecto Amadeus | Lenguaje de Señas en tiempo real 2026</small>
-
                             </div>
                         </div>
                         </div>
@@ -105,5 +119,4 @@ useEffect(() =>{
   
 );
 };
-
 export default Navbar;

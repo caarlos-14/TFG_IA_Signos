@@ -1,12 +1,3 @@
-:root {
-    --colorTextoBlanco: #ffffff;
-    --colorTextoNegro: #000000;
-    --colorInicial: rgba(65, 128, 175, 0.3);
-    --colorSecond: #86D597;
-    --colorInicialOpaco: #153658;
-    --colorDerechaLogin: #090044;
-}
-
 /* ── VOLVER ─────────────────────────────────────────── */
 .volver-inicio {
     width: 100%;
@@ -172,9 +163,6 @@
 
 /*Media query para pantallas móviles*/
 @media (max-width:576px) {
-
-
-
 .volver-inicio {
     width: 100%;
     margin-top:1em;

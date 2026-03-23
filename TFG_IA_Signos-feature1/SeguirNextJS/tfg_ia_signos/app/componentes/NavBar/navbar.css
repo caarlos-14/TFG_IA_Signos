@@ -1,12 +1,3 @@
-/*Colores*/
-:root {
-    --colorTextoBlanco: #ffffff;
-    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
-    --colorTextoNegro: #000000;
-    --colorInicial: rgba(65, 128, 175, 0.3);
-    --colorSecond: #86D597;
-    --colorInicialOpaco: #153658;
-}
 /*Seccion principal 
 con posicionmamiento de los elementos que lo componen*/
 .seccion_inicio{
@@ -115,8 +106,6 @@ display:flex;
 position:relative;
 }
 
-
-
 /*Color del desplegable del navbar de fondo*/
 .offcanvas {
 background-color: var(--colorInicialOpaco);
@@ -196,11 +185,20 @@ border-bottom-right-radius:20px;
     }
 }
 
-
+/*Media Query para el icono de boostrap cuando el navbar colapsa */
 @media (max-width:576px) {
     .navbar-toggler{
     width: 18%;
     margin-right:0.5em;
     }
+
 }
 
+/*Media Query para Pantallas parecida a los portatiles*/
+@media (min-width:1024px) and (max-width:1365px){
+.video_inicio{
+    width: 100%;
+    height: 130vh;
+    z-index: -1;
+}
+}
