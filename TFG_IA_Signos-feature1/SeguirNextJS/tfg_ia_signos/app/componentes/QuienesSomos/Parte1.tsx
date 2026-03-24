@@ -85,7 +85,7 @@ return(
             <h3 className="fw-bold fs-4">Desarrollador</h3>
             <div className="foto_container">
                 <Image 
-                    src="/Imagenes/Quienes_Somos/Imagenes/Desarrolladores/Carlos_desarrollador.png"
+                    src="/Imagenes/Quienes_Somos/Imagenes/Desarrolladores/carlos_desarrollador.png"
                     alt="Imagen Carlos"
                     width={200}
                     height={200}

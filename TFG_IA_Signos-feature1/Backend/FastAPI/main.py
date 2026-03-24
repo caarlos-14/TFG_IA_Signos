@@ -45,9 +45,9 @@ def hashPassword(password):
 # Configuración de CORS para permitir solicitudes desde el frontend
 origins = [
     "http://localhost:3000",
-    "https://lpgdlmjx-3000.uks1.devtunnels.ms/"
-    "http://tfg-amadeus.carlos-sanchez.dev"
-    "http://api.tfg-amadeus.carlos-sanchez.dev"
+    "https://lpgdlmjx-3000.uks1.devtunnels.ms/",
+    "https://tfg-amadeus.carlos-sanchez.dev",
+    "https://api.carlos-sanchez.dev"
 ]
 
 # Agregar middleware de CORS a la aplicación FastAPI
@@ -61,8 +61,8 @@ app.add_middleware(
 
 load_dotenv()
 # Configuración de Supabase
-url = os.getenv("NEXT_PUBLIC_SUPABASE_URL")
-key = os.getenv("NEXT_PUBLIC_SUPABASE_KEY")
+url = os.getenv("SUPABASE_URL")
+key = os.getenv("SERVICE_ROLE_SUPABASE_KEY")
 
 # Crear cliente de Supabase
 supabase: Client = create_client(url, key)
@@ -71,64 +71,30 @@ supabase: Client = create_client(url, key)
 @app.post("/insertar")
 def insertar_datos(usuario:Usuario_Registro):
 
-    if not usuario.validar_email():
-        return {"status":"error","message":"Email inválido"}
-
     validacion = validar_password(usuario.password)
-
     if validacion:
         return {"status":"error","message":validacion}
 
-    #Creamos dos variables para verificar que exista el email o el usuario o las dos
-    existe = supabase.table("Usuario").select("*").eq("nombre",usuario.nombre).execute()
-    existe_email = supabase.table("Usuario").select("*").eq("email",usuario.email).execute()
-
-    #Condiconales de mensaje desde el backend de la aplicación
-    if existe.data:return {"message":"Usuario ya existe"}
-    if existe_email.data:return {"message":"Email ya registrado"}
-    
-    try:
-        data = {
-        "nombre":usuario.nombre,
+    user = supabase.auth.sign_up({
         "email":usuario.email,
-        "password": hashPassword(usuario.password)
-        }   
-            
-        supabase.table("Usuario").insert(data).execute()
-        return {"status":"success", "message":"Usuario registrado correctamente"}
-    except Exception as e:
-        return {"status":"error", "message":str(e)}
-    
-
-
-
-
+        "password":usuario.password,
+        "options":{
+            "data":{
+               "nombre":usuario.nombre
+            }
+        }
+        })
+    return {"status":"success","message":"Usuario Registrado Correctamente","user":user} 
 
 class Usuario_Login(BaseModel):
-    usuario: str
+    email: str
     password: str
 
-def verificarPasswd(password,password_hash):
-    return pwd.verify(password,password_hash)
-
 @app.post("/login")
-async def login(usuario_form: Usuario_Login):
+async def login(usuario: Usuario_Login):
     try:
-        resul = supabase.table("Usuario").select("*").eq("nombre", usuario_form.usuario).execute()
-
-        if not resul.data:
-            return {"success": False, "message": "Usuario no encontrado"}
-
-        user = resul.data[0]
-
-        if not verificarPasswd(usuario_form.password,user["password"]):
-            return {"success": False, "message": "Contraseña incorrecta"}
-
-        return {
-            "success": True,
-            "message": "Login exitoso",
-            "user": {"nombre": user["nombre"], "email": user["email"]}
-        }
-
+        user = supabase.auth.sign_in_with_password({"email":usuario.email,"password":usuario.password})
+        return {"status":"success","user":user.user,"session":user.session}
+         
     except Exception as e:
-        return {"success": False, "message": f"Error del servidor: {str(e)}"}
+        return {"status": "error", "message": ""}

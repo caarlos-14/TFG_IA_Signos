@@ -31,7 +31,7 @@ const Footer = () =>{
                     {/*Indicamos la url del github donde estará alojado nuestro proyecto*/}
                     <div className="d-flex flex-row justify-content-center gap-3">
                     <Image
-                    src="/Imagenes/footer/Imagenes/github.png"
+                    src="/Imagenes/Footer/Imagenes/github.png"
                     alt="Logo Github"
                     width={30}
                     height={30}
@@ -53,7 +53,7 @@ const Footer = () =>{
                         <small><a href="mailto:csg0037@alu.medac.es">csg0037@alu.medac.es</a></small>
                         <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <Image
-                        src="/Imagenes/footer/Imagenes/Linkedin.png"
+                        src="/Imagenes/Footer/Imagenes/Linkedin.png"
                         alt="Logo Linkedin"
                         width={30}
                         height={30}
@@ -72,7 +72,7 @@ const Footer = () =>{
                         <small><a href="mailto:csg0037@alu.medac.es">jvb0017@alu.medac.es</a></small>
                         <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <Image
-                        src="/Imagenes/footer/Imagenes/Linkedin.png"
+                        src="/Imagenes/Footer/Imagenes/Linkedin.png"
                         alt="Logo Linkedin"
                         width={30}
                         height={30}
@@ -91,7 +91,7 @@ const Footer = () =>{
                         <small><a href="mailto:csg0037@alu.medac.es">avc003@alu.medac.es</a></small>
                         <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <Image
-                        src="/Imagenes/footer/Imagenes/Linkedin.png"
+                        src="/Imagenes/Footer/Imagenes/Linkedin.png"
                         alt="Logo Linkedin"
                         width={30}
                         height={30}

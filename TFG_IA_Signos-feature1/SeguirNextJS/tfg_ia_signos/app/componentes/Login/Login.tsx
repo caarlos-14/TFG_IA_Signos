@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import '@/app/componentes/Login/estiloslogin.css'
 import { useRouter } from "next/navigation";
+import { supabase } from "@/supabase";
 
 const Login = () => {
     const [usuario, setUsuario] = useState<string>("");
@@ -16,7 +17,7 @@ const Login = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         const datos = {
-            usuario: usuario,
+            email: usuario,
             password: password
         }
         setCargando(true);
@@ -31,7 +32,13 @@ const Login = () => {
             });
             const data = await res.json();
 
-            if (data.success) {
+            if (data.status === "success") {
+                
+                await supabase.auth.setSession({
+                    access_token:data.session.access_token,
+                    refresh_token:data.session.refresh_token
+                })
+
                 setExito(true);
                 setMensaje("¡Inicio de sesión exitoso!");
                 
