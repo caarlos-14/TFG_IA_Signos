@@ -1,0 +1,252 @@
+/*Propiedades de la imagen de la ventana*/
+.foto_LSE{
+width: 50%;
+height: 20vh;
+object-fit: contain;
+}
+
+/*Estilos para la ventana de explicación LSE*/
+.LSE_window {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    align-items: center;
+    background-color: var(--colorInicial);
+    width: 100%;
+    padding:1em;
+}
+
+
+.LSE_card{
+    width:100%;
+    min-height:550px;
+    max-width:50%;
+    display:flex;
+    margin-right:2em;
+    margin-top:2em;
+    margin-bottom:2em;
+    flex-direction:column;
+}
+.LSE_header{
+border-top-right-radius:30px ;
+}
+
+.texto_LSE{
+    margin-left:2em;
+    margin-top:2em;
+    margin-bottom:2em;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:2em;
+    background-color:var(--colorInicialOpaco);
+    color:var(--colorTextoBlanco);
+    border-top-left-radius:30px ;
+}
+
+.texto_LSE h3{
+font-size:2.5em;
+}
+
+.texto_LSE p{
+font-size:1.5em;
+line-height:1.9;
+}
+
+.LSE_header{
+    background-color: var(--colorInicialOpaco);
+    color: var(--colorTextoBlanco);
+    font-weight:bold;
+    text-align:center;
+    padding:0.5em;
+    border-left:2px solid var(--colorTextoBlanco);
+}
+
+
+.LSE_body{
+    width:100%;
+    height:100%;
+}
+
+.LSE_body iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+.LSE_iframe iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+}
+
+.LSE_controles{
+display:flex;
+justify-content:space-between;
+background-color:var(--colorInicialOpaco);
+padding:0.3em;
+border-left:2px solid var(--colorTextoBlanco);
+}
+
+.LSE_controles button, .LSE_controles a{
+color:var(--colorTextoBlanco) !important;
+margin:0 1em;
+transition:box-shadow 0.3s ease-out,transform 0.3s ease-out;
+}
+
+.LSE_controles button:hover, .LSE_controles a:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 4px var(--colorTextoBlanco);
+}
+
+
+/*MEDIA QUERY*/
+
+/*Media Query para moviles*/
+@media (max-width:768px){
+    .LSE_window h3{
+    font-size:1em;
+    }
+
+    .LSE_window p{
+    font-size:0.7em;
+    }
+
+    .foto_LSE{
+        margin:0 auto;
+    }
+    .texto_LSE{
+    margin:0 auto;
+    width:100%;
+    border-top-left-radius:0 ;
+    text-align:center;
+    }
+    .banner{
+    background-color:var(--colorInicialOpaco);
+    width:100%;
+    height:1vh;
+    }
+
+    .texto_LSE p{
+    font-size:1em;
+    }
+
+    .texto_LSE h3{
+    font-size:2em;
+    }
+    .LSE_header{
+      border-radius:0;  
+    }
+
+    .LSE_controles button,.LSE_controles a{
+        margin:0;
+    }
+
+    .LSE_card{
+    width:100%;
+    min-height:550px;
+    max-width:100%;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 4px 12px var(--colorInicial);
+}
+
+.LSE_window {
+    display: flex;
+    flex-direction:column;
+}
+
+.LSE_window h3 {
+font-size:1.5em;
+margin-top:2em;
+}
+
+.LSE_window p{
+font-size:1em;
+margin-bottom:2em;
+}
+
+}
+
+
+/*Media Query para tablets*/
+@media (min-width:768px) and (max-width:1023px) {
+.texto_LSE{
+    margin:2em 0;
+    padding:2em;
+    border-top-left-radius:0 ;
+}
+
+.LSE_card{
+    width:100%;
+    min-height:550px;
+    max-width:100%;
+    margin:0;
+}
+.LSE_header{
+border-radius:0;
+}
+
+.texto_LSE h3{
+font-size:2em;
+text-align:center;
+}
+
+.texto_LSE p{
+font-size:1.3em;
+text-align:center;
+}
+}
+
+/*Media Query para Pantallas parecida a los portatiles*/
+@media (min-width:1024px) and (max-width:1365px){
+
+    .texto_LSE p{
+        font-size:1.3em;
+    }
+
+    .texto_LSE h3{
+        font-size:1.8em;
+    }
+
+    .LSE_header{
+    border-radius:0;
+    }
+
+    .LSE_card{
+    width:100%;
+    min-height:550px;
+    max-width:100%;
+    margin:0 auto;
+    }
+    .texto_LSE{
+    margin:0 auto;
+    width:100%;
+    padding:4em;
+    border-top-left-radius:0 ;
+    }
+
+    .banner{
+    background-color:var(--colorInicialOpaco);
+    width:100%;
+    height:10vh;
+}
+}
+
+/*Pantallas más grandes*/
+@media (min-width:1366px){
+
+
+    .LSE_card{
+    margin-top:6em;
+    }
+
+    .banner-img{
+        top:0;
+    }
+
+    .texto_LSE{
+    padding:4em;
+    margin-top:6em;
+    border-top-left-radius:0 ;
+    }
+}
