@@ -110,7 +110,7 @@ const registrarUsuario = async (e: any) =>{
         
     {/*Enviamos los datos a la direccion indicada junto al fetch*/}
         try{
-            const response = await fetch("http://localhost:8000/insertar",{
+            const response = await fetch("https://tfg-amadeus.carlos-sanchez.dev/insertar",{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(datos)

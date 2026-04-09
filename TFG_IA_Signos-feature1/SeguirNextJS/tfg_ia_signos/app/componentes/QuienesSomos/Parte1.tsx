@@ -134,14 +134,218 @@ return(
 
 
 
-    <div className="Conatiner-fluid seccion-odiseIA min-vh-100">
-        <div className="row">
-            <div className="">
-                <h3>Ganadores del 3 Premio OdiseIA</h3>
-
+ <div className="container-fluid seccion-odiseIA min-vh-100 py-5">
+        <div className="row justify-content-center mb-4">
+            <div className="col-12 text-center titulo_seccion_nosotros">
+                <h2>Ganadores del 3er Puesto del Hackaton OdiseIA</h2>
             </div>
         </div>
-    </div> 
+        {/* Contenedor del texto e imagen del premio */}
+        <div className="row justify-content-center align-items-center mb-5 px-4 gap-4">
+            <div className="col-12 col-md-5 objetivo">
+                <p>
+                    Al ver el potencial de nuestro proyecto, decidimos entrar al Hackaton de OdiseIA, un hackaton que como 
+                    dice su nombre, busca en la inteligencia artificial formas para ayudar a gente que posea alguna discapacidad
+                    u otro problema a solucionarlo. Amadeus, al proporcionar visibilidad y cercanía a la gente que posee dificultades
+                    auditivas, vimos la oportunidad de hacer visible nuestro proyecto, que al final quedó en tercera posición con
+                    el premio de poder mostrarlo a la empresa "".
+                </p>
+            </div>
+            <div className="col-12 col-md-5 d-flex justify-content-center">
+                <Image
+                    src="/Imagenes/Quienes_Somos/Imagenes/odiseIA/tercero.png"
+                    alt="Imagen Ganadores"
+                    width={500}
+                    height={600}
+                    className="imagen_hackaton imagen_hackaton--principal"
+                />
+            </div>
+        </div>
+
+        {/* Contenedor de imagenes */}
+        <div className="row row-cols-2 row-cols-md-5 justify-content-center align-items-center px-4 gap-4">
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-109.jpg"
+                    alt="Imagen Sebastián"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-102.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-141.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-011.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-037.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-105.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-064.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-099.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-115.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-129.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-131.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-138.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-149.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-150.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-155.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-159.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-164.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-172.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-186.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+            <div className="col d-flex justify-content-center">
+                <Image
+                    src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-190.jpg"
+                    alt="Imagen OdiseIA"
+                    width={400}
+                    height={500}
+                    className="imagen_hackaton"
+                />
+            </div>
+        </div>
+    </div>
     </>
     
 )

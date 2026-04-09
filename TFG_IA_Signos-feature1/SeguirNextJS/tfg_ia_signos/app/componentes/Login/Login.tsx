@@ -23,7 +23,7 @@ const Login = () => {
         setCargando(true);
         setMensaje("");
         try {
-            const res = await fetch(`http://localhost:8000/login`, {
+            const res = await fetch(`https://api.carlos-sanchez.dev/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

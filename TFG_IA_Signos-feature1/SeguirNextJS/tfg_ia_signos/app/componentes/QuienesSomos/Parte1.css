@@ -221,3 +221,48 @@ padding-top:2em;
 }
 
 
+
+
+.imagenGanadores{
+    display: flex;
+}
+.seccion-odiseIA h2 {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--colorInicialOpaco);
+    text-transform: capitalize;
+    margin-bottom: 0.5em;
+}
+.seccion-odiseIA p {
+    color: var(--colorInicialOpaco)
+}
+.imagen_hackaton {
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .seccion-odiseIA h2 {
+        font-size: 2em;
+    }
+
+    .imagen_hackaton--principal {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* Móvil */
+@media (max-width: 767px) {
+    .seccion-odiseIA h2 {
+        font-size: 1.6em;
+    }
+
+    .imagen_hackaton {
+        max-width: 90%;
+    }
+}

@@ -2,15 +2,11 @@ from fastapi import FastAPI
 from supabase import create_client, Client
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from passlib.context import CryptContext
 import re
 import os
 from dotenv import load_dotenv
 
 app = FastAPI() 
-
-pwd = CryptContext(schemes=["argon2"], deprecated="auto")
-
 
 #Modelo de datos para el usuario
 class Usuario_Registro(BaseModel):
@@ -37,10 +33,6 @@ def validar_password(password):
         return "Falta carácter especial"
     
     return False
-
-def hashPassword(password):
-    return pwd.hash(password)
-
 
 # Configuración de CORS para permitir solicitudes desde el frontend
 origins = [

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prueba LSE ONNX Webcam</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #111;
+        color: #eee;
+        font-family: system-ui, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 16px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+      .video-wrap {
+        position: relative;
+        width: 100%;
+        max-width: 640px;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      video,
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+      }
+      button {
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 0;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      #startBtn {
+        background: #4f98a3;
+        color: #fff;
+      }
+      #stopBtn {
+        background: #333;
+        color: #eee;
+      }
+      .status {
+        font-size: 14px;
+      }
+      .status.ok {
+        color: #6daa45;
+      }
+      .status.err {
+        color: #d163a7;
+      }
+      .status.warn {
+        color: #e8af34;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        align-items: baseline;
+      }
+      #predLetter {
+        font-size: 32px;
+        font-weight: 700;
+      }
+      #predConf {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Traductor LSE dinámico</h1>
+    <p id="status" class="status warn">Cargando modelo…</p>
+
+    <div class="video-wrap">
+      <video id="video" autoplay playsinline muted></video>
+      <canvas id="overlay"></canvas>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn">Iniciar cámara</button>
+      <button id="stopBtn">Detener</button>
+    </div>
+
+    <div class="row">
+      <span>Predicción:</span>
+      <span id="predLetter">—</span>
+      <span id="predConf"></span>
+    </div>
+
+    <div class="row">
+      <span>Mano detectada:</span>
+      <span id="handState">No</span>
+    </div>
+
+    <!-- Librerías -->
+    <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+
+    <script>
+      // ===== Configuración básica =====
+      const MODEL_URL = "./Imagenes/Prototipo/modelo_lse_V3.onnx";
+      const CONF_THRESHOLD = 0.8;
+      const SEQ_LENGTH = 30;
+      const FEAT_DIM = 42;
+
+      // Sustituye por tus clases reales
+      const CLASSES = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+      ];
+
+      // Referencias al DOM
+      const video = document.getElementById("video");
+      const canvas = document.getElementById("overlay");
+      const ctx = canvas.getContext("2d");
+      const statusEl = document.getElementById("status");
+      const predLetter = document.getElementById("predLetter");
+      const predConf = document.getElementById("predConf");
+      const handState = document.getElementById("handState");
+      const startBtn = document.getElementById("startBtn");
+      const stopBtn = document.getElementById("stopBtn");
+
+      // Estado
+      let session = null;
+      let hands = null;
+      let stream = null;
+      let running = false;
+      let rafId = null;
+      const secuenciaBuffer = [];
+
+      // ===== Utilidades =====
+      function softmax(arr) {
+        const max = Math.max(...arr);
+        const exps = arr.map((v) => Math.exp(v - max));
+        const sum = exps.reduce((a, b) => a + b, 0);
+        return exps.map((v) => v / sum);
+      }
+
+      function extraerPuntosNormalizados(landmarks) {
+        const xs = landmarks.map((lm) => lm.x);
+        const ys = landmarks.map((lm) => lm.y);
+        const xw = xs[0],
+          yw = ys[0];
+        const xsC = xs.map((x) => x - xw);
+        const ysC = ys.map((y) => y - yw);
+        const dist = Math.sqrt(xsC[9] ** 2 + ysC[9] ** 2);
+        if (!isFinite(dist) || dist < 1e-6) return null;
+        const puntos = [];
+        for (let i = 0; i < 21; i++) {
+          puntos.push(xsC[i] / dist, ysC[i] / dist);
+        }
+        return puntos; // 42 valores
+      }
+
+      function resizeCanvas() {
+        const rect = video.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+
+      function drawResults(multiHandLandmarks) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (!multiHandLandmarks) return;
+        for (const lm of multiHandLandmarks) {
+          drawConnectors(ctx, lm, HAND_CONNECTIONS, {
+            color: "#4f98a3",
+            lineWidth: 2,
+          });
+          drawLandmarks(ctx, lm, { color: "#e8af34", radius: 3 });
+        }
+      }
+
+      // ===== Modelo ONNX =====
+      async function initModel() {
+        statusEl.textContent = "Cargando modelo ONNX…";
+        statusEl.className = "status warn";
+        session = await ort.InferenceSession.create(MODEL_URL, {
+          executionProviders: ["wasm"],
+        });
+        statusEl.textContent = 'Modelo listo. Pulsa "Iniciar cámara".';
+        statusEl.className = "status ok";
+      }
+
+      async function runModel() {
+        if (!session || secuenciaBuffer.length !== SEQ_LENGTH) return;
+
+        const flat = new Float32Array(secuenciaBuffer.flat());
+        const inputTensor = new ort.Tensor("float32", flat, [
+          1,
+          SEQ_LENGTH,
+          FEAT_DIM,
+        ]);
+
+        const results = await session.run({ input: inputTensor });
+        const output = results.logits || Object.values(results)[0];
+        const logits = Array.from(output.data);
+        const probs = softmax(logits);
+
+        const maxProb = Math.max(...probs);
+        const predIdx = probs.indexOf(maxProb);
+
+        if (maxProb > CONF_THRESHOLD) {
+          predLetter.textContent = CLASSES[predIdx] ?? `Clase ${predIdx}`;
+          predConf.textContent = `Confianza ${(maxProb * 100).toFixed(1)}%`;
+        } else {
+          predLetter.textContent = "—";
+          predConf.textContent = `Confianza insuficiente ${(maxProb * 100).toFixed(1)}%`;
+        }
+      }
+
+      // ===== MediaPipe Hands =====
+      async function initHands() {
+        hands = new Hands({
+          locateFile: (file) =>
+            `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+        });
+
+        hands.setOptions({
+          maxNumHands: 1,
+          modelComplexity: 1,
+          minDetectionConfidence: 0.7,
+          minTrackingConfidence: 0.7,
+        });
+
+        hands.onResults(async (results) => {
+          resizeCanvas();
+          drawResults(results.multiHandLandmarks);
+
+          const hasHand = !!results.multiHandLandmarks?.length;
+          handState.textContent = hasHand ? "Sí" : "No";
+
+          if (hasHand) {
+            const puntos = extraerPuntosNormalizados(
+              results.multiHandLandmarks[0],
+            );
+            if (puntos && puntos.length === FEAT_DIM) {
+              if (secuenciaBuffer.length === SEQ_LENGTH)
+                secuenciaBuffer.shift();
+              secuenciaBuffer.push(puntos);
+            }
+          }
+
+          if (secuenciaBuffer.length === SEQ_LENGTH) {
+            try {
+              await runModel();
+            } catch (err) {
+              statusEl.textContent = "Error en inferencia.";
+              statusEl.className = "status err";
+              console.error(err);
+            }
+          } else {
+            predLetter.textContent = "—";
+            predConf.textContent = "Esperando secuencia (30 frames)…";
+          }
+        });
+      }
+
+      // ===== Bucle de cámara =====
+      async function loop() {
+        if (!running) return;
+        await hands.send({ image: video });
+        rafId = requestAnimationFrame(loop);
+      }
+
+      async function start() {
+        try {
+          statusEl.textContent = "Solicitando cámara…";
+          statusEl.className = "status warn";
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: "user",
+              width: { ideal: 1280 },
+              height: { ideal: 720 },
+            },
+            audio: false,
+          });
+          video.srcObject = stream;
+          await video.play();
+          running = true;
+          loop();
+          statusEl.textContent = "Cámara activa.";
+          statusEl.className = "status ok";
+        } catch (err) {
+          statusEl.textContent = "No se pudo acceder a la cámara.";
+          statusEl.className = "status err";
+          console.error(err);
+        }
+      }
+
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        if (stream) stream.getTracks().forEach((t) => t.stop());
+        stream = null;
+        secuenciaBuffer.length = 0;
+        predLetter.textContent = "—";
+        predConf.textContent = "Detenido.";
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        statusEl.textContent = "Detenido.";
+        statusEl.className = "status warn";
+        handState.textContent = "No";
+      }
+
+      startBtn.addEventListener("click", start);
+      stopBtn.addEventListener("click", stop);
+
+      // Inicializar modelo y MediaPipe al cargar la página
+      (async function boot() {
+        await initModel();
+        await initHands();
+      })();
+    </script>
+  </body>
+</html>

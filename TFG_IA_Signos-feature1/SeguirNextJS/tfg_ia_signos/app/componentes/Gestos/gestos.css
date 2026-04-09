@@ -1,3 +1,12 @@
+/*Colores*/
+:root {
+    --colorTextoBlanco: #ffffff;
+    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
+    --colorTextoNegro: #000000;
+    --colorInicial: rgba(65, 128, 175, 0.3);
+    --colorSecond: #86D597;
+    --colorInicialOpaco: #153658;
+}
 /*Propiedades del carusel de manos*/
 .carusel{
 position:relative;
@@ -28,7 +37,6 @@ animation: slider 40s linear infinite;/*Agregamos animación*/
 margin: 1em;
 color: var(--colorTextoBlanco);
 width:auto !important;
-height: 12vh !important;
 position: relative;
 filter:contrast(60%);
 }
@@ -55,8 +63,8 @@ filter:contrast(60%);
 /*Media Query para pantallas más grandes*/ 
 @media (min-width:1366px){
     .carta{
-    width:120px;
-    height:90px;
+    width:1200px;
+    height:100px;
     }
     .carusel{
     height: 15vh;
@@ -73,4 +81,3 @@ height:90px;
 height: 18vh;
 }
 }
-

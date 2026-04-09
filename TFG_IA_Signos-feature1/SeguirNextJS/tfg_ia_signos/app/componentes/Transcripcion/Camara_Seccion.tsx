@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useRef, useState, useEffect,useCallback } from "react";
 import Webcam from "react-webcam";
 import "@/app/componentes/Transcripcion/estilostutocam.css";
+import {supabase} from "@/supabase"
 
 /*Array de objetos para iterar sobre ellos y mostrar los pasos por:
 -Titulo
@@ -34,6 +35,8 @@ const pasos = [
 ];
 
 
+
+
 export default function Camara_Seccion() {
 
   //Hook para poder hacer referencia a la cámara y poder manejarla en el código
@@ -45,6 +48,8 @@ export default function Camara_Seccion() {
   const [actual, setActual] = useState(0);
   const [clave, setClave] = useState(0);
   const [selectedDevice,setSelectedDevice] = useState("")
+  const [session, setSession] = useState(false);
+
 
   //Hook para poder cambiar el paso cada 3 segundos y medio
   useEffect(() => {
@@ -63,6 +68,19 @@ export default function Camara_Seccion() {
   const handleDevices = useCallback((mediaDevices:MediaDeviceInfo[]) =>{
     setDispositivos(mediaDevices.filter(({kind}) => kind === "videoinput"))
   },[])
+
+ useEffect(() =>{
+    const comprobarSesion = async () =>{
+        //Verificamos si existe sesion
+        const {data:{session}} = await supabase.auth.getSession();
+
+        if(session){
+          setSession(true);
+        }
+
+    }
+    comprobarSesion();    
+},[]);
 
   //Actualizamos
   const paso = pasos[actual];
@@ -96,11 +114,17 @@ export default function Camara_Seccion() {
           {/* Webcam */}
           <div className="col-12 col-md-6 col-lg-6">
             <div className="webcam-wrapper">
-              {camaraActiva ? (
+              {!session ? (
+                <div className="cam-bloqueada text-center">
+                  Camara bloqueada,<br/>Por favor inicia sesion
+                  <i className="bi bi-lock"/>
+                </div>
+              ) : !camaraActiva ? (
                 <div className="cam-off">
                   <p>Cámara desactivada</p>
                 </div>
               ) : (
+              
                 <Webcam
                   ref={webcamRef}
                   audio={false}
@@ -115,22 +139,15 @@ export default function Camara_Seccion() {
             </div>
 
             {/* Botones integrados debajo de la cámara */}
+            {session && (
             <div className="botones-cam d-flex flex-wrap flex-md-nowrap flex-row gap-2 mt-1 justify-content-center">
-              {camaraActiva ? (
                 <button
                   className="btn-cam"
-                  onClick={() => setCamaraActiva(false)}
+                  onClick={() => setCamaraActiva(!camaraActiva)}
                 >
-                  Activar cámara
+                  {camaraActiva ? "Desactivar Camara":"Activar Camara"}
                 </button>
-              ) : (
-                <button
-                  className="btn-cam"
-                  onClick={() => setCamaraActiva(true)}
-                >
-                  Desactivar cámara
-                </button>
-              )}
+             
               {dispositivos.length > 0 && (
                 <select className="btn-cam" value={selectedDevice}onChange={(e) => setSelectedDevice(e.target.value)}>
                 <option value="">Seleccionar Cámara</option>
@@ -140,9 +157,9 @@ export default function Camara_Seccion() {
                   </option>
                 ))}
                 </select>
-              )
-              }
+              )}
             </div>
+            )}
           </div>
 
           {/* Panel de transcripción */}

@@ -1,4 +1,5 @@
 import Navbar from '@/app/componentes/NavBar/Navbar'
+import "bootstrap-icons/font/bootstrap-icons.css";
 export default function PaginasLayout({
   children,
 }: {

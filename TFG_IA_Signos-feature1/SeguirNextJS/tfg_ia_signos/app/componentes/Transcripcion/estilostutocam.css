@@ -49,6 +49,7 @@
 .tutorial_card img {
   margin: 0 auto;
   width:140px;
+  height:auto;
   object-fit:contain;
 }
 
@@ -88,6 +89,17 @@
 
  /*Estilos para el contenedor que aparece cuando no se renderiza la cámara*/
 .cam-off {
+  width: 100%;
+  height:45vh;
+  background-color: var(--colorInicialOpaco);
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--colorSecond);
+}
+.cam-bloqueada{
   width: 100%;
   height:45vh;
   background-color: var(--colorInicialOpaco);
@@ -303,6 +315,9 @@ margin-left:0.5em;
   width: 100%;
   height:24vh;
 }
+
+.cam-bloqueada{
+  width: 100%;
+  height:25vh;
 }
-
-
+}
