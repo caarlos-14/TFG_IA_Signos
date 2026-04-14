@@ -11,7 +11,7 @@
 .carusel{
 position:relative;
 width: 100%;
-height: 18vh;
+height: 13vh;
 overflow:hidden;/*Ocultamos lo que sobresale*/
 background-color: var(--colorInicial);
 /*Agregamos opacidad a la entrada y salida del carrusel para ese efecto del carrusel*/

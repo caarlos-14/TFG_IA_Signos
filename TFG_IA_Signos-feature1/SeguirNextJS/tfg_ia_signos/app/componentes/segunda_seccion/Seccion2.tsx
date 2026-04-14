@@ -13,7 +13,7 @@ const seccion2 = () =>{
     <div className="row justify-content-center align-items-center mt-5">
         <div className="texto col-12 col-md-6">
         <p className="ms-3">Capturamos todos los <span className="destacado">movimientos de la mano</span> en tiempo real, 
-            Escribimos tus letras de forma dinámica y <span className="destacado">hacemos que tu comunicación sea mas fluida.</span></p>
+            Escribimos tus letras de forma dinámica y <span className="destacado">hacemos que tu comunicación sea más fluida.</span></p>
         </div>
         {/**Imagen de la cámara de fotos*/}
         <div className="imagen col-md-6"></div>

@@ -40,7 +40,7 @@ async function sesionGoogle(){
     const {error} = await supabase.auth.signInWithOAuth({
         provider:"google",
         options:{
-            redirectTo:"http://tfg-amadeus.carlos-sanchez.dev"
+            redirectTo:"https://tfg-amadeus.carlos-sanchez.dev"
         }
     });
     
@@ -110,7 +110,7 @@ const registrarUsuario = async (e: any) =>{
         
     {/*Enviamos los datos a la direccion indicada junto al fetch*/}
         try{
-            const response = await fetch("https://tfg-amadeus.carlos-sanchez.dev/insertar",{
+            const response = await fetch("http://localhost:8000/insertar",{
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(datos)

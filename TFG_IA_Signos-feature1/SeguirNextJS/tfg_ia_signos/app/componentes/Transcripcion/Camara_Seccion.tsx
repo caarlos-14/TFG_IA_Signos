@@ -116,7 +116,7 @@ export default function Camara_Seccion() {
             <div className="webcam-wrapper">
               {!session ? (
                 <div className="cam-bloqueada text-center">
-                  Camara bloqueada,<br/>Por favor inicia sesion
+                  Camara bloqueada,<br/>Por favor inicia sesión
                   <i className="bi bi-lock"/>
                 </div>
               ) : !camaraActiva ? (
@@ -169,7 +169,7 @@ export default function Camara_Seccion() {
                 <span className="dot-live" />
                 <h4>Transcripción en vivo</h4>
               </div>
-              <p className="texto-introduccion">¡Comienza a transcribir!</p>
+              <p className="d-none d-sm-block texto-introduccion">¡Comienza a transcribir!</p>
             </div>
           </div>
 

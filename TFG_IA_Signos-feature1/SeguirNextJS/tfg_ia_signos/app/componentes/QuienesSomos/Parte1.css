@@ -115,8 +115,16 @@ img{
     transition:transform 0.3s ease-in-out;
 }
 
+.card-odisea{
+background-color:var(--colorInicialOpaco);
+padding:2em;
+}
 
-
+.descripcion-odisea{
+color:var(--colorTextoBlanco) !important;
+font-size:1em;
+line-height:2em;
+}
 /*Media Query para pantallas grandes*/
 @media (min-width:1320px){
 .parte1_texto{
@@ -129,7 +137,7 @@ font-size:1.5em;
 
 .titulo_seccion_nosotros h2{
     font-size:3em;
-    margin-top: 2em;
+    margin-top: 0em;
     font-weight: bold;
     text-transform: capitalize;
 }
@@ -154,14 +162,14 @@ font-size:1.5em;
 
         .seccion-quienes-somos{
         width:92%;
-        min-height: 80vh;
+        min-height: 78vh;
         }
 
         .seccion-quienes-somos h3{
-        font-size:2em;
+        font-size:1.8em;
         }
         .seccion-quienes-somos p,.seccion-quienes-somos ul>li{
-        font-size:1.4em;
+        font-size:1.2em;
         }
 }
 
@@ -173,6 +181,9 @@ font-size:1.5em;
         margin-top: 2em;
         margin-bottom: 1em;
     }
+    .descripcion-odisea{
+    font-size:0.9em;
+    }
 
     .developer{
     max-width:320px;
@@ -180,7 +191,7 @@ font-size:1.5em;
 
     .seccion-quienes-somos{
     width:95%;
-    min-height: 85vh;
+    min-height: 83vh;
     padding-left:2.2em;
     }
 
@@ -191,6 +202,15 @@ font-size:1.5em;
 
     .seccion-quienes-somos h3{
         font-size:1.2em;
+        padding-top:1em;
+    }
+}
+
+@media (max-width:420px) {
+
+
+    .seccion-quienes-somos h3{
+        font-size:1em;
         padding-top:1em;
     }
 }
@@ -226,16 +246,7 @@ padding-top:2em;
 .imagenGanadores{
     display: flex;
 }
-.seccion-odiseIA h2 {
-    font-size: 3em;
-    font-weight: bold;
-    color: var(--colorInicialOpaco);
-    text-transform: capitalize;
-    margin-bottom: 0.5em;
-}
-.seccion-odiseIA p {
-    color: var(--colorInicialOpaco)
-}
+
 .imagen_hackaton {
     object-fit: cover;
     border-radius: 15px;
@@ -252,7 +263,7 @@ padding-top:2em;
 
     .imagen_hackaton--principal {
         width: 100%;
-        max-width: 400px;
+        max-width: 500px;
     }
 }
 

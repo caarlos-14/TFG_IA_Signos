@@ -37,7 +37,6 @@ def validar_password(password):
 # Configuración de CORS para permitir solicitudes desde el frontend
 origins = [
     "http://localhost:3000",
-    "https://lpgdlmjx-3000.uks1.devtunnels.ms/",
     "https://tfg-amadeus.carlos-sanchez.dev",
     "https://api.carlos-sanchez.dev"
 ]

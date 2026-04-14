@@ -111,7 +111,7 @@ Utilizamos media querys y boostrap para manejar responsividad*/
      /*Posicionamiento de la frase en móviles*/
     .frase{
         margin-top:-180px;
-        width: 100%;
+        width: 70%;
     }
 }
 

@@ -25,13 +25,13 @@ const slide = [
         valores:["Innovación","Inclusión","Precisión","Colaboración","Compromiso con la accesibilidad"]
     },
     {
-        titulo1:`¿Donde nace `,
+        titulo1:`¿Dónde nace `,
         titulo1_span:"Amadeus?",
         texto1:`Somos una iniciativa dedicada a la creación de soluciones basadas en`,
         texto1_parte2:"y enfocados a derribar la barrera de comunicación entre todas las personas",
         texto1_strong:"inteligencia artificial(IA),",
         imagen:`/Imagenes/Seccion_Inicio/logo_blanco.png`,
-        titulo2:`¿Cual es `,
+        titulo2:`¿Cuál es `,
         titulo2_span:"nuestro Objetivo?",
         texto2:`Nuestro objetivo es desarrollar herramientas de transcripción automatizada que permitan agilizar el trabajo de los usuarios y
                     poder garantizar esa precisión a la hora de transcribir sus gestos.`
@@ -52,7 +52,7 @@ return(
         
             <div className="col-10 col-md-6 parte1_texto ">
                 <h3>{slide[indice].titulo1}<span className="destacado">{slide[indice].titulo1_span}</span>{slide[indice].titulo1_parte2}</h3>
-                <p>{slide[indice].texto1}<strong> {slide[indice].texto1_strong}</strong>, 
+                <p>{slide[indice].texto1}<strong> {slide[indice].texto1_strong}</strong> 
                 {slide[indice].texto1_parte2}
                 </p>
             </div>
@@ -134,24 +134,35 @@ return(
 
 
 
- <div className="container-fluid seccion-odiseIA min-vh-100 py-5">
-        <div className="row justify-content-center mb-4">
-            <div className="col-12 text-center titulo_seccion_nosotros">
-                <h2>Ganadores del 3er Puesto del Hackaton OdiseIA</h2>
-            </div>
+ <div className="container-fluid seccion-odiseIA min-vh-100 ">
+        <div className="row d-flex align-items-center justify-content-center pb-5 py-5">
+             <div className="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                <Image
+                    src="/Imagenes/Quienes_Somos/Imagenes/odiseIA/odiseIA.png"
+                    alt="Logo OdiseIA"
+                    width={200}
+                    height={500}
+                />
+            </div>  
+            <div className="col-12 col-md-6 col-lg-9 text-center d-flex justify-content-center">
+                <h2>OdiseIA | Observatorio del Impacto Social y Ético de la IA</h2>
+            </div> 
         </div>
         {/* Contenedor del texto e imagen del premio */}
-        <div className="row justify-content-center align-items-center mb-5 px-4 gap-4">
-            <div className="col-12 col-md-5 objetivo">
-                <p>
+        <div className="row justify-content-center align-items-center card-odisea mb-5 px-4 gap-4">
+            <div className="col-12 col-md-12 col-lg-5">
+                <div className="col-12 titulo_seccion_nosotros">
+                <h2>3er Puesto Hackaton OdiseIA</h2>
+                </div>
+                <p className="descripcion-odisea">
                     Al ver el potencial de nuestro proyecto, decidimos entrar al Hackaton de OdiseIA, un hackaton que como 
                     dice su nombre, busca en la inteligencia artificial formas para ayudar a gente que posea alguna discapacidad
                     u otro problema a solucionarlo. Amadeus, al proporcionar visibilidad y cercanía a la gente que posee dificultades
                     auditivas, vimos la oportunidad de hacer visible nuestro proyecto, que al final quedó en tercera posición con
-                    el premio de poder mostrarlo a la empresa "".
+                    el premio de poder mostrarlo a la empresa.
                 </p>
             </div>
-            <div className="col-12 col-md-5 d-flex justify-content-center">
+            <div className="col-12 col-md-12 col-lg-5 d-flex justify-content-center">
                 <Image
                     src="/Imagenes/Quienes_Somos/Imagenes/odiseIA/tercero.png"
                     alt="Imagen Ganadores"
@@ -163,8 +174,8 @@ return(
         </div>
 
         {/* Contenedor de imagenes */}
-        <div className="row row-cols-2 row-cols-md-5 justify-content-center align-items-center px-4 gap-4">
-            <div className="col d-flex justify-content-center">
+        <div className="row row-cols-2 row-cols-md-5 justify-content-center align-items-center px-4 mb-5 gap-4">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-109.jpg"
                     alt="Imagen Sebastián"
@@ -173,7 +184,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-102.jpg"
                     alt="Imagen OdiseIA"
@@ -182,7 +193,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-141.jpg"
                     alt="Imagen OdiseIA"
@@ -191,7 +202,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-011.jpg"
                     alt="Imagen OdiseIA"
@@ -200,7 +211,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-037.jpg"
                     alt="Imagen OdiseIA"
@@ -209,7 +220,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-105.jpg"
                     alt="Imagen OdiseIA"
@@ -218,7 +229,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-064.jpg"
                     alt="Imagen OdiseIA"
@@ -227,7 +238,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-099.jpg"
                     alt="Imagen OdiseIA"
@@ -236,7 +247,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-115.jpg"
                     alt="Imagen OdiseIA"
@@ -245,7 +256,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-129.jpg"
                     alt="Imagen OdiseIA"
@@ -254,7 +265,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-131.jpg"
                     alt="Imagen OdiseIA"
@@ -263,7 +274,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-138.jpg"
                     alt="Imagen OdiseIA"
@@ -272,7 +283,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-149.jpg"
                     alt="Imagen OdiseIA"
@@ -281,7 +292,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-150.jpg"
                     alt="Imagen OdiseIA"
@@ -290,7 +301,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-155.jpg"
                     alt="Imagen OdiseIA"
@@ -299,7 +310,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-159.jpg"
                     alt="Imagen OdiseIA"
@@ -308,7 +319,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-164.jpg"
                     alt="Imagen OdiseIA"
@@ -317,7 +328,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-3 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-172.jpg"
                     alt="Imagen OdiseIA"
@@ -326,7 +337,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-186.jpg"
                     alt="Imagen OdiseIA"
@@ -335,7 +346,7 @@ return(
                     className="imagen_hackaton"
                 />
             </div>
-            <div className="col d-flex justify-content-center">
+            <div className="col-12 col-md-5 col-lg-5 d-flex justify-content-center">
                 <Image
                     src="https://hylpbcmxnnlbcpiygfkq.supabase.co/storage/v1/object/public/OdiseIA/OdiseIA/ODISEIA-2026-190.jpg"
                     alt="Imagen OdiseIA"

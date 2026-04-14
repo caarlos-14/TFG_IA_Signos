@@ -10,14 +10,14 @@ const LSE = () =>{
     const [utilizado,setUtilizado] = useState(false);
 
     const enlaces =[
-        {enlace:"https://ielse.es/"},
         {enlace:"https://www.emagister.com/"},
+        {enlace:"https://ielse.es/"},
         {enlace:"https://www.canalcursos.com/masformacion/cursos_y_cursos_fp_educacion_lenguaje_de_signos_espanola_online_online-opc22pc720p101t2/?campaignid=18800930355&adgroupid=144014671398&matchtype=&network=g&device=c&devicemodel=&keyword=&creative=684588770564&adposition=&placement=&clase2=sinfiltroprecio&gad_source=1&gad_campaignid=18800930355&gbraid=0AAAAADe2SwA_V4jffRrL4yvjWFF97uT3e&gclid=Cj0KCQiA49XMBhDRARIsAOOKJHaRL-x3B6NnToezzs-7Ob6ByqoFlbp3NSBeu8PXHxSf6scMJs4EtV0aAow6EALw_wcB#/subcategorias"}
     ]
 
         const items = [
         {
-            titulo:"¿Que es el LSE?",
+            titulo:"¿Qué es el LSE?",
             texto:`Es la lengua natural de las personas con discapacidad auditiva en España. 
                         Es un idioma completo ,con grámatica y estructura propias, que se comunican
                         a tráves del canal visual y gestual.`
@@ -29,7 +29,7 @@ const LSE = () =>{
                         LSE - Visual - Gestos/Expresiones`
         },
         {
-            titulo:"Sabias que...",
+            titulo:"Sabías qué...",
             texto:"El LSE no sigue el mismo orden gramatical que el español normal"
         },
 
@@ -60,13 +60,13 @@ const LSE = () =>{
                     <img className="position-absolute banner-img" width="100%" alt="banner de separación de sección" src="https://capsule-render.vercel.app/api?type=waving&height=100&color=86D597&reversal=true"/>
             </div>
 
-            <div className="texto_LSE col-12 col-md-12 col-lg-5">
+            <div className="texto_LSE col-12 col-md-12 col-lg-5 border-top border-4">
             <div className="mb-5">
             <h3>¿Quieres Aprender LSE?</h3>
             </div>
             <div>
-                <p>Por nuestra parte queremos facilitar <span className="destacado">sitios externos y recursos que os pueden facilitar el aprendizaje de
-                    del LSE(Lenguaje de señas española)</span>.<strong> A tráves del recuadro se tendrá accesos a varios recursos</strong>
+                <p>Por nuestra parte queremos facilitar <span className="destacado">sitios externos y recursos que os pueden facilitar el aprendizaje
+                    del LSE (Lenguaje de señas española)</span>.<strong> A tráves del recuadro se tendrá accesos a varios recursos</strong>
                 </p>
             </div>
             </div>

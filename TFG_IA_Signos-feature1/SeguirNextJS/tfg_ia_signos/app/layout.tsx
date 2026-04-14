@@ -25,6 +25,9 @@ export default function RootLayout({
   //Estructura de nuestro layout base para todas las páginas de la app
   return (
     <html lang="es">
+      <head>
+        <link rel="icon" type="image/png" href="Imagenes/Seccion_Inicio/Logo.png" />
+      </head>
       <body className={`${scienceGothic.variable}`}>
         <main>
           <div className="contenido"></div>
