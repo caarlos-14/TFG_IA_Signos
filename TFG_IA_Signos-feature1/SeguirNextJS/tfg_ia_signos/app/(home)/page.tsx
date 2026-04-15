@@ -14,36 +14,6 @@ import {useRouter} from 'next/navigation'
 export default function Home() {
 //**Codigo sujeto a pruebas, es posible quedeba borrarse más adelante */
 const router = useRouter();
-useEffect(() => {
-const comprobarSesion = async () =>{
-  const {data: {session},error} = await supabase.auth.getSession();
-if (error){
-  console.error("Error al obtener la sesión:", error);
-  return;
-}
-if(session){
-  console.log("Usuario autenticado:", session.user);
-}else{
-  console.log("No hay usuario autenticado");
-  /** 
-  setTimeout(() =>{
-  alert("No hay usuario registrado, redirigiendo para crear la sesión")
-  },5000)
-
-
-  setTimeout(() =>{
-    router.push("/Registro")
-  },8000)
-  */
-}
-}
-
-comprobarSesion();
-},[]);
-
-
-
-
 
   return (
 <>

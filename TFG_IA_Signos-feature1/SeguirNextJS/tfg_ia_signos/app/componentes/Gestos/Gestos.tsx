@@ -52,8 +52,9 @@ const Gestos = () => {
                             className="carta"
                             src={imagen.url}
                             alt="Imagen Gesto"
-                            width={100}
-                            height={100}
+                            width={110}
+                            height={110}
+                            style={{width: 'auto', height: 'auto'}}
                             title={imagen.letra}
                         />
                     ))}

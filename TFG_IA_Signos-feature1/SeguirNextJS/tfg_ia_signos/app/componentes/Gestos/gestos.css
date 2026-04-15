@@ -34,9 +34,7 @@ animation: slider 40s linear infinite;/*Agregamos animación*/
 
 /*Estilos de las cartas*/
 .carta{
-margin: 1em;
 color: var(--colorTextoBlanco);
-width:auto !important;
 position: relative;
 filter:contrast(60%);
 }
@@ -47,15 +45,15 @@ filter:contrast(60%);
 }
 
 /*Media Query para Tablets*/
-@media (min-width:768px) and (max-width:1023px){
+@media (min-width:768px) and (max-width:1024px){
 
     /*Propiedades del div de carusel para tablets*/
     .carusel{
-    height: 12vh;
+    height: 14vh;
     }
     /*Alto y ancho de las cards*/
     .carta{
-    height:8vh !important;
+    height:14vh !important;
     }
 
 }
@@ -79,5 +77,21 @@ height:90px;
 }
 .carusel{
 height: 18vh;
+}
+}
+
+/*Media Query para Móviles*/
+@media (max-width:769px){
+.carusel{
+height: 17vh;
+}
+}
+
+@media (min-width:1600px){
+.carusel{
+height: 12vh;
+}
+.carta{
+height:14vh !important;
 }
 }

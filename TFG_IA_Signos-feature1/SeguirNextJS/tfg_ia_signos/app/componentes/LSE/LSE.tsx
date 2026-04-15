@@ -8,6 +8,12 @@ const LSE = () =>{
     const [pagina,setPagina] = useState(0);
     const [valor,setValor] = useState(0);
     const [utilizado,setUtilizado] = useState(false);
+    const [recursos,setRecursos] = useState(false);
+
+
+    const toggleRecursos = () =>{
+        setRecursos(!recursos);
+    }
 
     const enlaces =[
         {enlace:"https://www.emagister.com/"},
@@ -62,17 +68,60 @@ const LSE = () =>{
 
             <div className="texto_LSE col-12 col-md-12 col-lg-5 border-top border-4">
             <div className="mb-5">
-            <h3>¿Quieres Aprender LSE?</h3>
+            <h3 className="text-left">¿Quieres Aprender LSE?</h3>
             </div>
             <div>
                 <p>Por nuestra parte queremos facilitar <span className="destacado">sitios externos y recursos que os pueden facilitar el aprendizaje
                     del LSE (Lenguaje de señas española)</span>.<strong> A tráves del recuadro se tendrá accesos a varios recursos</strong>
                 </p>
+                <button className="btn btn-primary" onClick={toggleRecursos}>Acceder a Recursos</button>
             </div>
             </div>
 
-                
-            <div className="LSE_card col-12 col-md-12 col-lg-5">
+{!recursos ? (
+<div className="LSE_card col-12 col-md-12 col-lg-12 recursos-container" >
+    <h3 className="text-center">Información Recursos (Lenguaje de Señas Española)</h3>
+        <div className="accordion w-100" id="accordionExample">
+                 <div className="accordion-item">
+                        <h2 className="accordion-header">
+                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Emagister
+                        </button>
+                        </h2>
+                     <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div className="accordion-body">
+                        <strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                        </div>
+                     </div>
+                </div>
+        <div className="accordion-item">
+                <h2 className="accordion-header">
+                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                IELSE
+                </button>
+                </h2>
+            <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div className="accordion-body">
+                    <strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+            </div>
+        </div>
+        <div className="accordion-item">
+            <h2 className="accordion-header">
+            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Canal Cursos
+            </button>
+             </h2>
+            <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div className="accordion-body">
+                <strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+            ):(
+            <div className="LSE_card col-12 col-md-12 col-lg-5" >
                 <div className="LSE_header">
                     <h4>Recursos Recomendados</h4>
                 </div>
@@ -90,7 +139,7 @@ const LSE = () =>{
                     <button onClick={handleAfter} className="btn">Siguiente</button>
                 </div>
             </div>
-
+            )}
 
             <div className="LSE_window col-12">
                 <Image

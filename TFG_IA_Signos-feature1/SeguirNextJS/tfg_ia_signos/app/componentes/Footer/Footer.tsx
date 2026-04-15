@@ -22,7 +22,7 @@ const Footer = () =>{
                     width={200}
                     height={200}
                     className="img-fluid"
-                    
+                    style={{width: 'auto', height: 'auto'}}
                     />
                     {/*Titulo del trabajo*/}
                     <h4 className="mt-3">Título del trabajo:Amadeus Transcripción Lenguaje de Señas</h4>

@@ -21,6 +21,7 @@ const ContenidoInicio = () => {
                     className="image"
                     width={500}
                     height={500}
+                    priority
                     />
                 </div>
             </div>

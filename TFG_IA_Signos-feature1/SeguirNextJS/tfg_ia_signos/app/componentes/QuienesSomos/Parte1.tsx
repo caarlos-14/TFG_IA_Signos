@@ -90,6 +90,7 @@ return(
                     width={200}
                     height={200}
                     className="imagen_dev"
+                    style={{ width: 'auto', height: 'auto' }}
                 />
             </div>
             <h5 className="mt-1">Carlos Sánchez</h5>
@@ -106,6 +107,7 @@ return(
                     width={200}
                     height={200}
                     className="imagen_dev"
+                    style={{ width: 'auto', height: 'auto' }}
                 />
             </div>
           <h5 className="mt-1">Angel Sebastián</h5>
@@ -122,6 +124,7 @@ return(
                     width={180}
                     height={180}
                     className="imagen_dev"
+                    style={{ width: 'auto', height: 'auto' }}
                 />
             </div>
             <h5 className="mt-1">Jorge Valverde</h5>

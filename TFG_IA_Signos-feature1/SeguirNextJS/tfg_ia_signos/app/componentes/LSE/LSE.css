@@ -98,6 +98,26 @@ transition:box-shadow 0.3s ease-out,transform 0.3s ease-out;
     box-shadow:0 0 4px var(--colorTextoBlanco);
 }
 
+.recursos-container{
+    background-color:var(--colorInicial);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:2em 0;
+    padding:1em;
+}
+.recursos-container h3{
+margin-bottom:3em;
+}
+
+.recursos-contenido{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    height:100% ;
+}
+
 
 /*MEDIA QUERY*/
 
