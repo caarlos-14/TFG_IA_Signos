@@ -32,7 +32,7 @@ margin:2em 0;
 }
 /**Propiedades de la imagen de la sección(cámara)*/
 .imagen{
-background-image: url("/Imagenes/Seccion_Inicio/Seccion2/camara-3d.png");
+background-image: url("/imagenes/seccion_inicio/seccion2/camara-3d.png");
 background-repeat: no-repeat;
 background-size: contain;
 background-position: center;

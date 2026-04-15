@@ -51,19 +51,13 @@ filter:contrast(60%);
     .carusel{
     height: 14vh;
     }
-    /*Alto y ancho de las cards*/
-    .carta{
-    height:14vh !important;
-    }
+
 
 }
 
 /*Media Query para pantallas más grandes*/ 
 @media (min-width:1366px){
-    .carta{
-    width:1200px;
-    height:100px;
-    }
+
     .carusel{
     height: 15vh;
     }
@@ -71,10 +65,6 @@ filter:contrast(60%);
 
 /*Media Query para Pantallas parecida a los portatiles*/
 @media (min-width:1024px) and (max-width:1365px){
-.carta{
-width:90px;
-height:90px;
-}
 .carusel{
 height: 18vh;
 }
@@ -91,7 +81,5 @@ height: 17vh;
 .carusel{
 height: 12vh;
 }
-.carta{
-height:14vh !important;
-}
+
 }
