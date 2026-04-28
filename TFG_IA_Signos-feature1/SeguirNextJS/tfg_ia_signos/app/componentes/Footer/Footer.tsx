@@ -53,7 +53,7 @@ const Footer = () =>{
                         <small><a href="mailto:csg0037@alu.medac.es">csg0037@alu.medac.es</a></small>
                         <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <Image
-                        src="/Imagenes/Footer/Imagenes/Linkedin.png"
+                        src="/Imagenes/Footer/Imagenes/linkedin.png"
                         alt="Logo Linkedin"
                         width={30}
                         height={30}
@@ -69,10 +69,10 @@ const Footer = () =>{
                     <div className="d-flex flex-column">
                         <h5>Jorge Valverde</h5>
                         <small>(Alumno y Creador de Amadeus)</small>
-                        <small><a href="mailto:csg0037@alu.medac.es">jvb0017@alu.medac.es</a></small>
+                        <small><a href="mailto:jvb0017@alu.medac.es">jvb0017@alu.medac.es</a></small>
                         <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <Image
-                        src="/Imagenes/Footer/Imagenes/Linkedin.png"
+                        src="/Imagenes/Footer/Imagenes/linkedin.png"
                         alt="Logo Linkedin"
                         width={30}
                         height={30}
@@ -88,10 +88,10 @@ const Footer = () =>{
                     <div className="d-flex flex-column">
                         <h5>Ángel Sebastián</h5>
                         <small>(Alumno y Creador de Amadeus)</small>
-                        <small><a href="mailto:csg0037@alu.medac.es">avc003@alu.medac.es</a></small>
+                        <small><a href="mailto:avc003@alu.medac.es">avc003@alu.medac.es</a></small>
                         <div className="d-flex justify-content-center align-items-center gap-2 mt-1">
                         <Image
-                        src="/Imagenes/Footer/Imagenes/Linkedin.png"
+                        src="/Imagenes/Footer/Imagenes/linkedin.png"
                         alt="Logo Linkedin"
                         width={30}
                         height={30}

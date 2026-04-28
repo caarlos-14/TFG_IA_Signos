@@ -7,7 +7,7 @@ const seccion2 = () =>{
             <div className="container-fluid p-0 m-0">
         {/**Video de la camara sección 2 */}
         <video className="video_seccion2 col-12" autoPlay muted loop playsInline>
-            <source src="/Imagenes/Seccion_inicio/Seccion2/camara_video.mp4" type="video/mp4"/>
+            <source src="/Imagenes/Seccion_Inicio/Seccion2/camara_video.mp4" type="video/mp4"/>
         </video>
         {/**Texto Informativo de la sección2*/}
     <div className="row justify-content-center align-items-center mt-5">

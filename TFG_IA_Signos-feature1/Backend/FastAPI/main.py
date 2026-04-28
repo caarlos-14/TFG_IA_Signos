@@ -77,6 +77,10 @@ def insertar_datos(usuario:Usuario_Registro):
         })
     return {"status":"success","message":"Usuario Registrado Correctamente","user":user} 
 
+
+# Endpoint para iniciar sesión
+
+#Establecemos un modelo para los datos de inicio de sesión del usuario
 class Usuario_Login(BaseModel):
     email: str
     password: str

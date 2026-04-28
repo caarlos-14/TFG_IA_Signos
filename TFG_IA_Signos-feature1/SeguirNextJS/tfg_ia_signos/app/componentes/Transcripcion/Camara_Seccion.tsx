@@ -77,7 +77,6 @@ export default function Camara_Seccion() {
         if(session){
           setSession(true);
         }
-
     }
     comprobarSesion();    
 },[]);

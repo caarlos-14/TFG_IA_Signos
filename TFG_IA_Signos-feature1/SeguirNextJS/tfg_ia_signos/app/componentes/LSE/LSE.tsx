@@ -5,28 +5,31 @@ import "@/app/componentes/LSE/LSE.css"
 
 
 const LSE = () =>{
+    {/**Hooks*/}
     const [pagina,setPagina] = useState(0);
     const [valor,setValor] = useState(0);
-    const [utilizado,setUtilizado] = useState(false);
     const [recursos,setRecursos] = useState(false);
 
 
+    {/**Alternar entre abierto y cerrado*/}
     const toggleRecursos = () =>{
         setRecursos(!recursos);
     }
 
+    {/**Enlaces de recursos para aprender LSE*/}
     const enlaces =[
         {enlace:"https://www.emagister.com/"},
         {enlace:"https://ielse.es/"},
-        {enlace:"https://www.canalcursos.com/masformacion/cursos_y_cursos_fp_educacion_lenguaje_de_signos_espanola_online_online-opc22pc720p101t2/?campaignid=18800930355&adgroupid=144014671398&matchtype=&network=g&device=c&devicemodel=&keyword=&creative=684588770564&adposition=&placement=&clase2=sinfiltroprecio&gad_source=1&gad_campaignid=18800930355&gbraid=0AAAAADe2SwA_V4jffRrL4yvjWFF97uT3e&gclid=Cj0KCQiA49XMBhDRARIsAOOKJHaRL-x3B6NnToezzs-7Ob6ByqoFlbp3NSBeu8PXHxSf6scMJs4EtV0aAow6EALw_wcB#/subcategorias"}
+        {enlace:"https://signame.es/"}
     ]
 
+    {/**Array de objetos para mostrar información cada 5 segundos*/}
         const items = [
         {
             titulo:"¿Qué es el LSE?",
             texto:`Es la lengua natural de las personas con discapacidad auditiva en España. 
-                        Es un idioma completo ,con grámatica y estructura propias, que se comunican
-                        a tráves del canal visual y gestual.`
+                        Es un idioma completo ,con gramática y estructura propias, que se comunican
+                        a través del canal visual y gestual.`
         },
         {
             titulo:"LSE VS Lengua Natural",
@@ -41,15 +44,17 @@ const LSE = () =>{
 
     ]
 
+    {/**Manejo del interrvalo del cambio de informacion*/}
     useEffect(() =>{
-    setUtilizado(true)
       const interval = setInterval(() =>{
         setValor((prev) => (prev+1) % items.length)
       },5000)
 
+      {/**Limpiamos el intervalo cuando el componente se desmonta*/}
       return () => clearInterval(interval)
     },[])
 
+    //Manejo de los botones para anterior y siguiente
     const handleAfter = () =>{
         setPagina((prev) => (prev + 1) % enlaces.length)
     }
@@ -58,68 +63,67 @@ const LSE = () =>{
         setPagina((prev) => (prev - 1 + enlaces.length) % enlaces.length)
     }
 
-    if(!utilizado) return null;
     return(
         <div className="container-fluid g-0">
             <div className="row g-0">
-            <div className=" d-lg-none position-relative">
+                <div className=" d-lg-none position-relative">
                     <img className="position-absolute banner-img" width="100%" alt="banner de separación de sección" src="https://capsule-render.vercel.app/api?type=waving&height=100&color=86D597&reversal=true"/>
-            </div>
+                </div>
 
             <div className="texto_LSE col-12 col-md-12 col-lg-5 border-top border-4">
-            <div className="mb-5">
-            <h3 className="text-left">¿Quieres Aprender LSE?</h3>
-            </div>
-            <div>
-                <p>Por nuestra parte queremos facilitar <span className="destacado">sitios externos y recursos que os pueden facilitar el aprendizaje
-                    del LSE (Lenguaje de señas española)</span>.<strong> A tráves del recuadro se tendrá accesos a varios recursos</strong>
-                </p>
-                <button className="btn btn-primary" onClick={toggleRecursos}>Acceder a Recursos</button>
-            </div>
+                    <div className="mb-5">
+                        <h3 className="text-left">¿Quieres Aprender LSE?</h3>
+                    </div>
+                <div>
+                    <p>Por nuestra parte queremos facilitar <span className="destacado">sitios externos y recursos que os pueden facilitar el aprendizaje
+                        del LSE (Lenguaje de señas española)</span>.<strong> A tráves del recuadro se tendrá accesos a varios recursos</strong>
+                    </p>
+                    <button className="btn btn-primary" onClick={toggleRecursos}>{recursos ? "Ocultar Recursos":"Mostrar Recursos"}</button>
+                </div>
             </div>
 
-{!recursos ? (
-<div className="LSE_card col-12 col-md-12 col-lg-12 recursos-container" >
-    <h3 className="text-center">Información Recursos (Lenguaje de Señas Española)</h3>
-        <div className="accordion w-100" id="accordionExample">
-                 <div className="accordion-item">
+            {!recursos ? (
+            <div className="LSE_card col-12 col-md-12 col-lg-12 recursos-container" >
+                <h3 className="text-center">Información Recursos (Lenguaje de Señas Española)</h3>
+                <div className="accordion w-100" id="accordionExample">
+                    <div className="accordion-item">
+                            <h2 className="accordion-header">
+                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Emagister
+                            </button>
+                            </h2>
+                        <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                <div className="accordion-body">
+                                <strong>Emagister es un comparador de cursos de LSE formativo que conecta a miles de estudiantes con diferentes: cursos,grados y másteres</strong> Aquí podrás buscar en diferentes lugares, donde imparten el curso que te hará aprender y mediante sus filtros, obtener una búsqueda precisa.
+                            </div>
+                        </div>
+                    </div>
+                    <div className="accordion-item">
                         <h2 className="accordion-header">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        Emagister
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        IELSE
                         </button>
                         </h2>
-                     <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                        <strong>This is the first item’s accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            <strong>Instituto de Enseñanza de la Lengua de Signos Española</strong> centro especializado en la formación y ensañanza práctica de la LSE. Ofrece cursos desde nivel básico hasta avanzado, con un enfoque en la comunicación efectiva y la comprensión cultural. Además, cuenta con un equipo de instructores altamente capacitados y recursos didácticos para facilitar el aprendizaje de la lengua de signos.
                         </div>
-                     </div>
-                </div>
-        <div className="accordion-item">
-                <h2 className="accordion-header">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                IELSE
-                </button>
-                </h2>
-            <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    <strong>This is the second item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                    </div>
+                <div className="accordion-item">
+                        <h2 className="accordion-header">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Signame
+                        </button>
+                        </h2>
+                    <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div className="accordion-body">
+                        <strong>Plataforma Educativa que ofece espacio virtual de aprendizaje</strong> Mediante sus recursos digitales imparten diferentes recursos para aquellas personas que desean y estan interesadas en aprender el LSE .
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div className="accordion-item">
-            <h2 className="accordion-header">
-            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-            Canal Cursos
-            </button>
-             </h2>
-            <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div className="accordion-body">
-                <strong>This is the third item’s accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It’s also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
             ):(
             <div className="LSE_card col-12 col-md-12 col-lg-5" >
                 <div className="LSE_header">
@@ -127,7 +131,7 @@ const LSE = () =>{
                 </div>
                 <div className="LSE_body">
                     {enlaces[pagina] &&(
-                        <iframe key={pagina} src={enlaces[pagina].enlace}  title="Paginas de aprendizaje" ></iframe>
+                        <iframe key={pagina} src={enlaces[pagina].enlace}  title="Paginas de aprendizaje"></iframe>
                     )}
                     
                 </div>
@@ -156,7 +160,7 @@ const LSE = () =>{
             </div>
         </div>
     </div>
-    </div>
+</div>
 )
 }
 export default LSE

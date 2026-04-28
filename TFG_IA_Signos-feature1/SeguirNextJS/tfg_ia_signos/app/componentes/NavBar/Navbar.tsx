@@ -2,7 +2,7 @@
 
 //Importamos hooks para navegacion y saber la ruta en la que estamos
 import Link from 'next/link';
-import {usePathname} from 'next/navigation';
+import {usePathname,useRouter} from 'next/navigation';
 //Importamos el archivo de supabase
 import { supabase } from '@/supabase';
 import { useEffect,useState } from 'react';
@@ -15,6 +15,7 @@ const [usuario,setUsuario] = useState<string | null>(null);
 const [activar,setActivar] = useState<boolean>(false);
 //Obtener la ruta actual
 const path = usePathname();
+const router = useRouter();
 
 useEffect(() =>{
     const comprobarSesion = async () =>{
@@ -88,6 +89,7 @@ useEffect(() =>{
                             onClick={async () =>{
                             await supabase.auth.signOut();
                             setUsuario(null);
+                            window.location.href = "/";
                             }}
                             >Cerrar Sesión
                             </a>
