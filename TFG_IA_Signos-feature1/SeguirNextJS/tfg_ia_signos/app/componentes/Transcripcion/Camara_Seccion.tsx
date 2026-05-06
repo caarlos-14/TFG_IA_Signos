@@ -95,7 +95,7 @@ export default function Camara_Seccion() {
     async function cargarModelo() {
       try {
         modeloIA.current = await InferenceSession.create(
-          "/models/modelo_lse_V3.onnx",
+          "/modelo/modelo_lse_V3.onnx",
           { executionProviders: ["wasm"] },
         );
 
