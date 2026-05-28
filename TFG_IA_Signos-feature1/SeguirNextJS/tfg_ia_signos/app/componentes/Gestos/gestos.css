@@ -1,0 +1,85 @@
+/*Colores*/
+:root {
+    --colorTextoBlanco: #ffffff;
+    --colorBlancoSuave: rgba(255, 255, 255, 0.2);
+    --colorTextoNegro: #000000;
+    --colorInicial: rgba(65, 128, 175, 0.3);
+    --colorSecond: #86D597;
+    --colorInicialOpaco: #153658;
+}
+/*Propiedades del carusel de manos*/
+.carusel{
+position:relative;
+width: 100%;
+height: 13vh;
+overflow:hidden;/*Ocultamos lo que sobresale*/
+background-color: var(--colorInicial);
+/*Agregamos opacidad a la entrada y salida del carrusel para ese efecto del carrusel*/
+mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+);
+}
+
+/*Propiedades del div padre de las cartas*/
+.grupo{
+display: flex;
+margin-bottom: 1em;
+width:max-content;
+animation: slider 40s linear infinite;/*Agregamos animación*/
+}
+
+/*Estilos de las cartas*/
+.carta{
+color: var(--colorTextoBlanco);
+position: relative;
+filter:contrast(60%);
+}
+/*Animación Carrusel*/
+@keyframes slider{
+    0%{transform:translateX(0%);}
+    100%{transform: translateX(-50%)}
+}
+
+/*Media Query para Tablets*/
+@media (min-width:768px) and (max-width:1024px){
+
+    /*Propiedades del div de carusel para tablets*/
+    .carusel{
+    height: 14vh;
+    }
+
+
+}
+
+/*Media Query para pantallas más grandes*/ 
+@media (min-width:1366px){
+
+    .carusel{
+    height: 15vh;
+    }
+}
+
+/*Media Query para Pantallas parecida a los portatiles*/
+@media (min-width:1024px) and (max-width:1365px){
+.carusel{
+height: 18vh;
+}
+}
+
+/*Media Query para Móviles*/
+@media (max-width:769px){
+.carusel{
+height: 17vh;
+}
+}
+
+@media (min-width:1600px){
+.carusel{
+height: 12vh;
+}
+
+}

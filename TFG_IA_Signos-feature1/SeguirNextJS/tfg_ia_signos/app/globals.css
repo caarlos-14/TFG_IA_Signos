@@ -1,0 +1,28 @@
+
+/*Colores*/
+:root {
+  --colorTextoBlanco: #ffffff;
+  --colorTextoNegro: #000000;
+  --colorInicial: rgba(65, 128, 175, 0.3);
+  --colorSecond: #86D597;
+  --colorInicialOpaco: #153658;
+  --colorPuntos:rgba(255,255,255,0.2);
+  --colorInicial2:rgba(65, 128, 175, 0.5);
+  --colorLineaTranscripción:rgba(134, 213, 151, 0.15);
+  --font-sciencegothic:'Science Gothic',sans-serif;
+}
+/*Deshabilitamos el scroll horizontal
+Aplicamos el tipo de letra
+Balanceamos el texto para que no salga desalineado*/
+html,body{
+overflow-x:hidden;
+font-family:var(--font-sciencegothic),sans-serif !important;
+text-wrap:balance;
+}
+
+/*Destacar texto con color verde con negrita*/
+.destacado{
+    color:var(--colorSecond);
+    font-weight: bold;
+}
+
