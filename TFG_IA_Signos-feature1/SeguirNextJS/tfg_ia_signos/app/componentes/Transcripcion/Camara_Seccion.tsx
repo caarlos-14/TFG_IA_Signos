@@ -44,30 +44,23 @@ const clases = [
   "A",
   "B",
   "C",
+  "CH",
   "D",
   "E",
   "F",
   "G",
-  "H",
   "I",
   "J",
   "K",
   "L",
+  "LL",
   "M",
   "N",
+  "NONE",
   "O",
   "P",
-  "Q",
   "R",
-  "S",
-  "T",
   "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-  "LL",
 ];
 
 export default function Camara_Seccion() {
@@ -94,7 +87,7 @@ export default function Camara_Seccion() {
     async function cargarModelo() {
       try {
         modeloIA.current = await InferenceSession.create(
-          "/modelo/modelo_lse_V3.onnx",
+          "/modelo/modelo_lse_V3_0_1.onnx",
           { executionProviders: ["wasm"] },
         );
 
@@ -231,7 +224,7 @@ export default function Camara_Seccion() {
         webcamRef.current &&
         detectorManos.current &&
         webcamRef.current.video &&
-        webcamRef.current.video.readyState === 4 && 
+        webcamRef.current.video.readyState === 4 &&
         webcamRef.current.video.videoWidth > 0
       ) {
         // Enviamos el frame actual de la webcam al detector de MediaPipe
@@ -373,7 +366,9 @@ export default function Camara_Seccion() {
               <div className="p-3 mt-5 d-flex flex-column justify-content-center align-items-center">
                 <h2 className="text-white">{transcripcion}</h2>
                 <p className="text-white">
-                  {!modeloListo ? "Cargando Modelo" : "Modelo de Predicción Listo"} 
+                  {!modeloListo
+                    ? "Cargando Modelo"
+                    : "Modelo de Predicción Listo"}
                 </p>
               </div>
             </div>
